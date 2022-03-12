@@ -1,0 +1,42 @@
+{
+  "name": "@kuka/icons",
+  "version": "1.0.0",
+  "private": true,
+  "author": "Kuka Team",
+  "keywords": [
+    "react",
+    "react-component",
+    "icons"
+  ],
+  "scripts": {
+    "build": "cp -r lib/ build/ && build:typings",
+    "build:typings": "babel-node ./scripts/create-typings.js"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "react": "^17.0.2"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.14.8"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/node": "^7.14.9",
+    "fs-extra": "^10.0.0",
+    "chalk": "^4.1.2",
+    "fast-glob": "^3.2.11"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
