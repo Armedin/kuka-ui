@@ -1,3 +1,3 @@
-# @kuka/types
+# @kukui/types
 
-Types used by Kuka.
+Types used by Kukui.

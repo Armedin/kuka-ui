@@ -1,8 +1,8 @@
 {
-  "name": "@kukui/types",
+  "name": "@kukui/system",
   "version": "1.0.0-test",
-  "description": "Types for Kuka.",
-  "types": "./index.d.ts",
+  "description": "System utils for Kuka.",
+  "main": "./src/index.ts",
   "scripts": {
     "build": "mkdir build && cpy index.d.ts build/ && yarn build:create-packages",
     "build:create-packages": "node ../../scripts/create-package.js",
@@ -12,30 +12,43 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Armedin/kuka-ui.git",
-    "directory": "packages/types"
+    "directory": "packages/system"
   },
   "keywords": [
     "react",
     "react-component",
     "kuka-ui",
     "kukui",
-    "types"
+    "system"
   ],
   "author": "Armedin Kuka",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Armedin/kuka-ui/issues"
   },
-  "homepage": "https://github.com/Armedin/kuka-ui/tree/master/packages/types",
+  "homepage": "https://github.com/Armedin/kuka-ui/tree/master/packages/system",
   "peerDependencies": {
-    "@types/react": "*"
-  },
-  "publishConfig": {
-    "access": "public"
+    "@emotion/react": "^11.8.0",
+    "@emotion/styled": "^11.8.0",
+    "@types/react": "^17.0.0",
+    "react": "17.0.0"
   },
   "peerDependenciesMeta": {
     "@types/react": {
       "optional": true
+    },
+    "@emotion/react": {
+      "optional": true
+    },
+    "@emotion/styled": {
+      "optional": true
     }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@kukui/types": "^1.0.0-test",
+    "clsx": "^1.1.1"
   }
 }
