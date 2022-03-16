@@ -1,20 +1,36 @@
 {
-  "name": "@kuka/icons",
-  "version": "1.0.0",
-  "private": true,
-  "author": "Kuka Team",
+  "name": "@kukui/icons",
+  "version": "1.0.3-test",
+  "private": false,
+  "main": "./src/index.ts",
+  "bugs": {
+    "url": "https://github.com/Armedin/kuka-ui/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Armedin/kuka-ui.git",
+    "directory": "packages/icons"
+  },
+  "type": "module",
+  "author": "Armedin Kuka",
+  "license": "ISC",
   "keywords": [
     "react",
     "react-component",
     "icons"
   ],
   "scripts": {
-    "build": "cp -r lib/ build/ && build:typings",
-    "build:typings": "babel-node ./scripts/create-typings.js"
+    "build": "mkdir build && yarn build:typings && yarn build:node && yarn build:create-packages",
+    "build:typings": "babel-node ./scripts/create-typings.js",
+    "build:create-packages": "node ../../scripts/create-package.js",
+    "build:node": "node ../../scripts/build stable",
+    "prebuild": "rimraf build",
+    "clean": "rimraf build",
+    "release": "yarn build && npm publish build"
   },
-  "type": "module",
   "peerDependencies": {
-    "react": "^17.0.2"
+    "react": "^17.0.2",
+    "@kukui/ui": "^1.0.5-testing"
   },
   "peerDependenciesMeta": {
     "@types/react": {
@@ -32,11 +48,11 @@
     "chalk": "^4.1.2",
     "fast-glob": "^3.2.11"
   },
-  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "engines": {
     "node": ">=12.0.0"
-  }
+  },
+  "types": "./src/index.d.ts"
 }

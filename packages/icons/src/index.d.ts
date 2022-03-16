@@ -1,5 +1,4 @@
-
-import { SvgIcon } from '@kuka';
+import { SvgIcon } from '@kukui/ui';
 
 type SvgIconComponent = typeof SvgIcon;
 

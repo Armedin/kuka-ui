@@ -3,8 +3,8 @@ import chalk from 'chalk';
 import glob from 'fast-glob';
 import fs from 'fs-extra';
 
-const SRC_DIR = path.resolve('./lib');
-const TARGET_DIR = path.resolve();
+const SRC_DIR = path.resolve('./src');
+const TARGET_DIR = path.resolve('./build');
 
 function normalizeFileName(file) {
   return path.parse(file).name;
@@ -12,7 +12,7 @@ function normalizeFileName(file) {
 
 function createIndexTyping(files) {
   const contents = `
-import { SvgIcon } from '@kuka';
+import { SvgIcon } from '@kukui/ui';
 
 type SvgIconComponent = typeof SvgIcon;
 
