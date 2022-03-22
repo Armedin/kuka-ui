@@ -22,11 +22,13 @@ const SvgIconRoot = styled('svg')(
   },
   props => ({
     ...styledSx(props),
-    fontSize: {
-      sm: '20px',
-      md: '24px',
-      lg: '35px',
-    }[props.fontSize],
+    ...(props.fontSize && {
+      fontSize: {
+        sm: '20px',
+        md: '24px',
+        lg: '35px',
+      }[props.fontSize],
+    }),
   })
 );
 

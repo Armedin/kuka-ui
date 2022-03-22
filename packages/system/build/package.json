@@ -1,6 +1,6 @@
 {
   "name": "@kukui/system",
-  "version": "1.0.9-test.0",
+  "version": "1.0.10-test.0",
   "description": "System utils for Kuka.",
   "main": "./index.js",
   "repository": {
@@ -42,7 +42,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@kukui/types": "^1.0.2-test.0",
+    "@kukui/types": "^1.0.3-test.0",
     "clsx": "^1.1.1",
     "deepmerge": "^4.2.2"
   },

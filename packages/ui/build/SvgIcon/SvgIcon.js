@@ -12,7 +12,7 @@ var SvgIconRoot = styled('svg')({
   fill: 'currentColor',
   userSelect: 'none'
 }, function (props) {
-  return _extends({}, styledSx(props), {
+  return _extends({}, styledSx(props), props.fontSize && {
     fontSize: {
       sm: '20px',
       md: '24px',

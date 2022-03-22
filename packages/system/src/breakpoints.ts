@@ -1,4 +1,4 @@
-export const values = {
+export const values: { [key: string]: number } = {
   xs: 0, // phone
   sm: 600, // tablet
   md: 900, // small laptop

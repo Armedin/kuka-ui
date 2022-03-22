@@ -14,14 +14,14 @@ const defaultStyle = {
   opacity: 0,
 };
 
-const transitionStyles = {
+const transitionStyles: { [key: string]: any } = {
   entering: { transform: 'scale(0.5)', opacity: 0 },
   entered: { transform: 'scale(1)', opacity: 1 },
   exiting: { transform: 'scale(1)', opacity: 1 },
   exited: { transform: 'scale(0.5)', opacity: 0 },
 };
 
-const overlayTransition = {
+const overlayTransition: { [key: string]: any } = {
   entering: { opacity: 0 },
   entered: { opacity: 1 },
   exiting: { opacity: 1 },

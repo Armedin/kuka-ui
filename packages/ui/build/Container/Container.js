@@ -12,7 +12,7 @@ var ContainerRoot = styled('span')({
   marginRight: 'auto',
   display: 'block'
 }, function (props) {
-  return _extends({}, styledSx(props), props.maxWidth !== 'xs' && _defineProperty({}, breakpoints.up(props.maxWidth), {
+  return _extends({}, styledSx(props), props.maxWidth && props.maxWidth !== 'xs' && _defineProperty({}, breakpoints.up(props.maxWidth), {
     maxWidth: "".concat(breakpoints.values[props.maxWidth], "px")
   }), !props.disableGutters && _defineProperty({
     paddingLeft: '1rem',

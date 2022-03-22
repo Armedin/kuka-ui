@@ -1,5 +1,5 @@
 import React from 'react';
-interface BoxProps {
+export interface BoxProps {
     component?: React.ElementType;
     className?: string;
     sx?: object;

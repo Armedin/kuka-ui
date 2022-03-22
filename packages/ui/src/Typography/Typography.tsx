@@ -24,7 +24,7 @@ export interface TypographyProps {
     | 'subtitle2';
 }
 
-const variantMapping = {
+const variantMapping: { [key: string]: string } = {
   h1: 'h1',
   h2: 'h2',
   h3: 'h3',

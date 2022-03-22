@@ -6,6 +6,7 @@ var splitProps = function splitProps(props) {
     otherProps: {}
   };
   Object.keys(props).forEach(function (prop) {
+    //@ts-ignore
     result.otherProps[prop] = props[prop];
   });
   return result;

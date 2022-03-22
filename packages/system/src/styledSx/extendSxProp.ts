@@ -4,6 +4,7 @@ const splitProps = (props: any): any => {
   };
 
   Object.keys(props).forEach(prop => {
+    //@ts-ignore
     result.otherProps[prop] = props[prop];
   });
 

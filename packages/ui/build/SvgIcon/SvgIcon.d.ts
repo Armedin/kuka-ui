@@ -1,5 +1,5 @@
 import React from 'react';
-interface SvgIconProps {
+export interface SvgIconProps {
     component?: React.ElementType;
     children?: React.ReactChild;
     className?: string;

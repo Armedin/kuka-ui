@@ -20,11 +20,12 @@ const ContainerRoot = styled('span')<ContainerProps>(
   },
   props => ({
     ...styledSx(props),
-    ...(props.maxWidth !== 'xs' && {
-      [breakpoints.up(props.maxWidth)]: {
-        maxWidth: `${breakpoints.values[props.maxWidth]}px`,
-      },
-    }),
+    ...(props.maxWidth &&
+      props.maxWidth !== 'xs' && {
+        [breakpoints.up(props.maxWidth)]: {
+          maxWidth: `${breakpoints.values[props.maxWidth]}px`,
+        },
+      }),
     ...(!props.disableGutters && {
       paddingLeft: '1rem',
       paddingRight: '1rem',
