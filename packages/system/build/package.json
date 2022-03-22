@@ -2,15 +2,7 @@
   "name": "@kukui/system",
   "version": "1.0.10-test.0",
   "description": "System utils for Kuka.",
-  "main": "./src/index.ts",
-  "scripts": {
-    "build": "mkdir build && yarn build:node && yarn build:create-packages",
-    "build:create-packages": "node ../../scripts/create-package.js",
-    "build:node": "node ../../scripts/build stable",
-    "prebuild": "rimraf build",
-    "clean": "rimraf build",
-    "release": "yarn build && npm publish build"
-  },
+  "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Armedin/kuka-ui.git",
@@ -54,5 +46,8 @@
     "clsx": "^1.1.1",
     "deepmerge": "^4.2.2"
   },
-  "gitHead": "d2c10edcad9a9f1a8ded271c8a13117b789ea81c"
+  "gitHead": "d2c10edcad9a9f1a8ded271c8a13117b789ea81c",
+  "private": false,
+  "module": "./index.js",
+  "types": "./index.d.ts"
 }
