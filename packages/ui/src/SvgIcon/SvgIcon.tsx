@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import styledSx, { extendSxProp } from '@kuka/system/styledSx';
+import { styledSx, extendSxProp } from '@kukui/system';
 
-interface SvgIconProps {
+export interface SvgIconProps {
   component?: React.ElementType;
   children?: React.ReactChild;
   className?: string;

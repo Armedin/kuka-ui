@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import styledSx, { extendSxProp } from '@kuka/system/styledSx';
+import { styledSx, extendSxProp } from '@kukui/system';
 import React from 'react';
 
 export interface TypographyProps {

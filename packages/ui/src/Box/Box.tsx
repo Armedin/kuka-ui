@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import styledSx from '@kuka/system/styledSx';
+import { styledSx } from '@kukui/system';
 import React from 'react';
 
-interface BoxProps {
+export interface BoxProps {
   component?: React.ElementType;
   className?: string;
   sx?: object;

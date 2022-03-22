@@ -1,12 +1,14 @@
 {
   "name": "@kukui/system",
-  "version": "1.0.0-test",
+  "version": "1.0.8-test.0",
   "description": "System utils for Kuka.",
   "main": "./src/index.ts",
   "scripts": {
-    "build": "mkdir build && cpy index.d.ts build/ && yarn build:create-packages",
+    "build": "mkdir build && yarn build:node && yarn build:create-packages",
     "build:create-packages": "node ../../scripts/create-package.js",
+    "build:node": "node ../../scripts/build stable",
     "prebuild": "rimraf build",
+    "clean": "rimraf build",
     "release": "yarn build && npm publish build"
   },
   "repository": {
@@ -48,7 +50,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@kukui/types": "^1.0.0-test",
-    "clsx": "^1.1.1"
+    "@kukui/types": "^1.0.1-test.0",
+    "clsx": "^1.1.1",
+    "deepmerge": "^4.2.2"
   }
 }

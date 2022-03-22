@@ -1,7 +1,7 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
 import styled from '@emotion/styled';
-import IconButton from '../IconButton';
+import { IconButton } from '@kukui/ui';
 
 interface ModalProps {
   open?: boolean;

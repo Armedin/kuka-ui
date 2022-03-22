@@ -33,6 +33,7 @@ const SIconButton = styled('button')({
   fontSize: '1rem',
   borderRadius: '50%',
   border: 'none',
+  backgroundColor: 'transparent',
   transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
 });
 

@@ -33,7 +33,7 @@ const InputWrapper = styled.div`
   padding: 0 11px;
   border-width: 1px;
   background-color: #fff;
-  border: 1px solid var(--kuka-border);
+  border: 1px solid var(--kukui-border);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.035);
   transition: all 0.2s ease;
 
@@ -53,7 +53,7 @@ const StyledInput = styled.input`
   border: none;
   -webkit-appearance: none;
   padding: 11px 0;
-  color: var(--kuka-text-default);
+  color: var(--kukui-text-default);
   width: 100%;
   &::placeholder {
     opacity: 1;
@@ -71,7 +71,7 @@ const LabelWrapper = styled.div`
 const StyledLabel = styled.label`
   position: relative;
   font-weight: 500;
-  color: var(--kuka-text-default);
+  color: var(--kukui-text-default);
 `;
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(

@@ -1,2 +1,3 @@
 export { default as breakpoints } from './breakpoints';
-export * from './styledSx';
+export { styledSx, extendSxProp } from './styledSx';
+export { default as shouldForwardProp } from './shouldForwardProp';

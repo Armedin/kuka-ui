@@ -1,7 +1,6 @@
-import styledSx, { extendSxProp } from '@kuka/system/styledSx';
+import { styledSx, extendSxProp, breakpoints } from '@kukui/system';
 import styled from '@emotion/styled';
 import React from 'react';
-import breakpoints from '@kuka/system/breakpoints';
 
 interface ContainerProps {
   component?: React.ElementType;

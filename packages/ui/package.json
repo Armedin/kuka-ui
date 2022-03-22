@@ -1,6 +1,6 @@
 {
-  "name": "@kuka/ui",
-  "version": "1.0.0",
+  "name": "@kukui/ui",
+  "version": "1.0.8-testing.0",
   "description": "A dead-simple React UI library",
   "main": "./src/index.ts",
   "keywords": [
@@ -11,7 +11,13 @@
     "types"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "mkdir build && yarn build:node && yarn build:create-packages",
+    "build:create-packages": "node ../../scripts/create-package.js",
+    "build:node": "node ../../scripts/build stable",
+    "prebuild": "rimraf build",
+    "clean": "rimraf build",
+    "release": "yarn build && npm publish build"
   },
   "repository": {
     "type": "git",
@@ -40,6 +46,8 @@
     }
   },
   "dependencies": {
+    "@kukui/system": "^1.0.8-test.0",
+    "@kukui/types": "^1.0.1-test.0",
     "@types/react-transition-group": "^4.4.4",
     "clsx": "^1.1.1",
     "react-transition-group": "^4.4.2"

@@ -1,22 +1,26 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "target": "es5",
+    "lib": ["es2020", "dom"],
     "jsx": "preserve",
-    "incremental": true
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": false,
+    "allowJs": true,
+    "paths": {
+      "@kukui/ui": ["./packages/ui/src"],
+      "@kukui/ui/*": ["./packages/ui/src"],
+      "@kukui/types": ["./packages/types"],
+      "@kukui/system": ["./packages/system/src"]
+    },
+    // Otherwise we get react-native typings which conflict with dom.lib.
+    "types": ["node", "react"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
-  "typeRoots": ["node_modules/@types", "types", "kuka/types"],
-  "exclude": ["node_modules"]
+  "exclude": ["**/.*/", "**/build", "**/node_modules", "docs/export"]
 }

@@ -1,0 +1,53 @@
+{
+  "name": "@kukui/ui",
+  "version": "1.0.8-testing.0",
+  "description": "A dead-simple React UI library",
+  "main": "./index.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "kuka-ui",
+    "kukui",
+    "types"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Armedin/kuka-ui.git",
+    "directory": "packages/ui"
+  },
+  "author": "Armedin Kuka",
+  "license": "ISC",
+  "homepage": "https://github.com/Armedin/kuka-ui#readme",
+  "peerDependencies": {
+    "@emotion/react": "^11.8.0",
+    "@emotion/styled": "^11.8.0",
+    "@types/react": "^17.0.0",
+    "react": "17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    },
+    "@emotion/react": {
+      "optional": true
+    },
+    "@emotion/styled": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@kukui/system": "^1.0.8-test.0",
+    "@kukui/types": "^1.0.1-test.0",
+    "@types/react-transition-group": "^4.4.4",
+    "clsx": "^1.1.1",
+    "react-transition-group": "^4.4.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "private": false,
+  "module": "./index.js",
+  "types": "./index.d.ts"
+}
