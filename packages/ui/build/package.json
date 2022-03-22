@@ -1,6 +1,6 @@
 {
   "name": "@kukui/ui",
-  "version": "1.0.8-testing.0",
+  "version": "1.0.9-testing.0",
   "description": "A dead-simple React UI library",
   "main": "./index.js",
   "keywords": [
@@ -37,8 +37,8 @@
     }
   },
   "dependencies": {
-    "@kukui/system": "^1.0.8-test.0",
-    "@kukui/types": "^1.0.1-test.0",
+    "@kukui/system": "^1.0.9-test.0",
+    "@kukui/types": "^1.0.2-test.0",
     "@types/react-transition-group": "^4.4.4",
     "clsx": "^1.1.1",
     "react-transition-group": "^4.4.2"

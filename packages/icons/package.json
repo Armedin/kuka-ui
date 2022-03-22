@@ -1,6 +1,6 @@
 {
   "name": "@kukui/icons",
-  "version": "1.0.5-test.0",
+  "version": "1.0.6-test.0",
   "private": false,
   "main": "./src/index.ts",
   "bugs": {
@@ -29,7 +29,6 @@
     "release": "yarn build && npm publish build"
   },
   "peerDependencies": {
-    "@kukui/ui": "^1.0.5-testing",
     "react": "^17.0.2"
   },
   "peerDependenciesMeta": {

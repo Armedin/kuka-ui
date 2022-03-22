@@ -5,7 +5,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "release:version": "lerna version --no-changelog --no-push --no-git-tag-version",
     "release:build": "lerna run --parallel --scope \"@kukui/*\" build",
-    "release:publish": "lerna publish from-package --dist-tag latest --contents build"
+    "release:publish": "lerna publish from-package --dist-tag latest --contents build",
+    "clean": "lerna run --parallel --scope \"@kukui/*\" clean"
   },
   "author": "Armedin Kuka",
   "devDependencies": {
