@@ -1,6 +1,7 @@
+import { SxProps } from '@kukui/system';
 import React from 'react';
 export interface TypographyProps {
-    sx?: object;
+    sx?: SxProps;
     truncate?: boolean;
     component?: React.ElementType;
     children?: React.ReactNode;

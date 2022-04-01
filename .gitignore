@@ -5,3 +5,4 @@ package-lock.json
 .pnp.js
 /build
 /node_modules
+/packages/*/build
