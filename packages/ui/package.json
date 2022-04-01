@@ -47,8 +47,8 @@
     }
   },
   "dependencies": {
-    "@kukui/system": "^1.0.10-test.0",
-    "@kukui/types": "^1.0.3-test.0",
+    "@kukui/system": "*",
+    "@kukui/types": "*",
     "@types/react-transition-group": "^4.4.4",
     "clsx": "^1.1.1",
     "react-transition-group": "^4.4.2"

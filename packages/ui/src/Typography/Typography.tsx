@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import { styledSx, extendSxProp } from '@kukui/system';
+import { styledSx, SxProps } from '@kukui/system';
 import React from 'react';
 
 export interface TypographyProps {
-  sx?: object;
+  sx?: SxProps;
   truncate?: boolean;
   component?: React.ElementType;
   children?: React.ReactNode;
@@ -54,21 +54,14 @@ const TypographyRoot = styled('span')<TypographyProps>(
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(
   (inProps, ref) => {
-    const props = extendSxProp({ ...inProps });
+    const { component, variant = 'body1', ...other } = inProps;
 
-    const { component, variant, ...other } = props;
-
-    const Component = component || variantMapping[variant] || 'span';
+    const Component: any = component || variantMapping[variant] || 'span';
 
     return <TypographyRoot as={Component} ref={ref} {...other} />;
   }
 );
 
 Typography.displayName = 'Typography';
-
-Typography.defaultProps = {
-  variant: 'body1',
-  sx: {},
-};
 
 export default Typography;

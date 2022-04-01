@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { styledSx, extendSxProp } from '@kukui/system';
+import { styledSx, SxProps } from '@kukui/system';
 
 export interface SvgIconProps {
   component?: React.ElementType;
   children?: React.ReactChild;
   className?: string;
-  sx?: object;
+  sx?: SxProps;
   viewBox?: string;
   fontSize?: 'inherit' | 'lg' | 'md' | 'sm';
 }
@@ -32,9 +32,13 @@ const SvgIconRoot = styled('svg')(
   })
 );
 
-const SvgIcon = React.forwardRef<HTMLElement, SvgIconProps>((inProps, ref) => {
-  const props = extendSxProp({ ...inProps });
-  const { component, viewBox, ...other } = props;
+const SvgIcon = React.forwardRef<any, SvgIconProps>((inProps, ref) => {
+  const {
+    component = 'svg',
+    viewBox = '0 0 320 512',
+    fontSize = 'md',
+    ...other
+  } = inProps;
 
   return (
     <SvgIconRoot
@@ -43,18 +47,12 @@ const SvgIcon = React.forwardRef<HTMLElement, SvgIconProps>((inProps, ref) => {
       viewBox={viewBox}
       aria-hidden={true}
       role="img"
+      fontSize={fontSize}
       ref={ref}
       {...other}
     />
   );
 });
-
-SvgIcon.defaultProps = {
-  component: 'svg',
-  viewBox: '0 0 320 512',
-  fontSize: 'md',
-  sx: {},
-};
 
 SvgIcon.displayName = 'SvgIcon';
 

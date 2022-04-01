@@ -21,3 +21,10 @@ export * from './Container';
 
 export { default as SvgIcon } from './SvgIcon';
 export * from './SvgIcon';
+
+export { default as Table } from './Table';
+export * from './Table';
+
+export * from './Card';
+
+export { default as GlobalStyles } from './GlobalStyles';

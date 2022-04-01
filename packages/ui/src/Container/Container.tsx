@@ -1,4 +1,4 @@
-import { styledSx, extendSxProp, breakpoints } from '@kukui/system';
+import { styledSx, breakpoints, SxProps } from '@kukui/system';
 import styled from '@emotion/styled';
 import React from 'react';
 
@@ -6,7 +6,7 @@ interface ContainerProps {
   component?: React.ElementType;
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   disableGutters?: boolean;
-  sx?: object;
+  sx?: SxProps;
   children?: React.ReactNode;
 }
 
@@ -39,20 +39,14 @@ const ContainerRoot = styled('span')<ContainerProps>(
 
 const Container = React.forwardRef<HTMLElement, ContainerProps>(
   (inProps, ref) => {
-    const props = extendSxProp({ ...inProps });
+    const { component = 'div', maxWidth = 'lg', ...other } = inProps;
 
-    const { component, ...other } = props;
-
-    return <ContainerRoot as={component} ref={ref} {...other} />;
+    return (
+      <ContainerRoot as={component} maxWidth={maxWidth} ref={ref} {...other} />
+    );
   }
 );
 
 Container.displayName = 'Container';
-
-Container.defaultProps = {
-  component: 'div',
-  maxWidth: 'lg',
-  sx: {},
-};
 
 export default Container;

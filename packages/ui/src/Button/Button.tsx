@@ -47,6 +47,9 @@ export const StyledButton = styled('button', {
   ...(props.color && {
     backgroundColor: `var(--kukui-${props.color})`,
     color: '#fff',
+    '&:hover': {
+      backgroundColor: `var(--kukui-${props.color}-hover)`,
+    },
   }),
 }));
 

@@ -1,14 +1,21 @@
 import clsx from 'clsx';
 import React, { ChangeEventHandler, useState } from 'react';
 import styled from '@emotion/styled';
+import InputPrefixSuffix from '../InputPrefixSuffix';
+import Textarea from '../Textarea';
 
 interface InputProps {
   type?: 'text' | 'number' | 'email' | 'password';
   id?: string;
   className?: string;
   value?: string;
+  maxRows?: number;
+  minRows?: number;
   placeholder?: string;
   label?: string;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
+  textarea?: boolean;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
@@ -17,7 +24,6 @@ const FieldWrapper = styled.div`
     margin-top: 24px;
   }
 
-  margin-bottom: 16px;
   position: relative;
   display: inline-block;
   text-align: left;
@@ -33,7 +39,7 @@ const InputWrapper = styled.div`
   padding: 0 11px;
   border-width: 1px;
   background-color: #fff;
-  border: 1px solid var(--kukui-border);
+  border: 1px solid var(--kukui-input-border);
   box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.035);
   transition: all 0.2s ease;
 
@@ -43,23 +49,38 @@ const InputWrapper = styled.div`
   }
   &.focused {
     background-color: #fff;
-    box-shadow: rgb(218 218 219 / 30%) 0px 0px 0px 3px;
+    box-shadow: var(--kukui-input-border-focused) 0px 0px 0px 3px;
   }
 `;
 
-const StyledInput = styled.input`
-  outline: none;
-  background: none;
-  border: none;
-  -webkit-appearance: none;
-  padding: 11px 0;
-  color: var(--kukui-text-default);
-  width: 100%;
-  &::placeholder {
-    opacity: 1;
-    color: #a5afbd;
-  }
-`;
+const InputRoot = styled('input')<InputProps>(
+  {
+    outline: 'none',
+    background: 'none',
+    border: 'none',
+    WebkitAppearance: 'none',
+    padding: '11px 0',
+    fontFamily: 'inherit',
+    letterSpacing: 'inherit',
+    color: 'var(--kukui-text-default)',
+    width: '100%',
+    display: 'block',
+    minWidth: 0,
+    '&::placeholder': {
+      opacity: 1,
+      color: '#a5afbd',
+    },
+    '&:focus': {
+      outline: 0,
+    },
+  },
+  props => ({
+    ...(props.textarea && {
+      height: 'auto',
+      resize: 'none',
+    }),
+  })
+);
 
 const LabelWrapper = styled.div`
   position: absolute;
@@ -74,46 +95,72 @@ const StyledLabel = styled.label`
   color: var(--kukui-text-default);
 `;
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type, id, className, value, label, placeholder, onChange }, ref) => {
-    const [focused, setFocused] = useState(false);
+const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
+  const {
+    type = 'text',
+    id,
+    className,
+    value,
+    label,
+    minRows,
+    maxRows,
+    placeholder,
+    onChange,
+    prefix,
+    suffix,
+    textarea = false,
+  } = inProps;
 
-    const handleFocus = () => {
-      setFocused(true);
-    };
+  const [focused, setFocused] = useState(false);
 
-    const handleBlur = () => {
-      setFocused(false);
-    };
+  const handleFocus = () => {
+    setFocused(true);
+  };
 
-    return (
-      <FieldWrapper className={clsx(label && 'has-label')}>
-        <InputWrapper className={clsx(focused && 'focused')}>
-          <StyledInput
-            ref={ref}
-            className={className}
-            value={value}
-            id={id}
-            type={type}
-            placeholder={placeholder}
-            onChange={onChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-        </InputWrapper>
-        {label && (
-          <LabelWrapper>
-            <StyledLabel>{label}</StyledLabel>
-          </LabelWrapper>
-        )}
-      </FieldWrapper>
-    );
+  const handleBlur = () => {
+    setFocused(false);
+  };
+
+  let InputComponent = 'input' as any;
+
+  if (textarea) {
+    InputComponent = Textarea;
   }
-);
-Input.displayName = 'Input';
 
-Input.defaultProps = {
-  type: 'text',
-};
+  return (
+    <FieldWrapper className={clsx('KukuiFieldWrapper', label && 'has-label')}>
+      <InputWrapper className={clsx('KukuiInputWrapper', focused && 'focused')}>
+        {prefix && (
+          <InputPrefixSuffix type="prefix">{prefix}</InputPrefixSuffix>
+        )}
+        <InputRoot
+          ref={ref}
+          className={clsx('KukuiInput', className)}
+          value={value}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          textarea={textarea}
+          onChange={onChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          maxRows={maxRows}
+          minRows={minRows}
+          as={InputComponent}
+        />
+        {suffix && (
+          <InputPrefixSuffix type="suffix">{suffix}</InputPrefixSuffix>
+        )}
+      </InputWrapper>
+      {label && (
+        <LabelWrapper className="KukuiLabelWrapper">
+          <StyledLabel className="KukuiLabel">{label}</StyledLabel>
+        </LabelWrapper>
+      )}
+    </FieldWrapper>
+  );
+});
+
+Input.displayName = 'Input';
 
 export default Input;
