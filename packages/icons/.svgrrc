@@ -1,0 +1,4 @@
+{
+  "outDir": "./src",
+  "typescript": true
+}

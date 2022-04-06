@@ -11,8 +11,8 @@
     "url": "git+https://github.com/Armedin/kuka-ui.git",
     "directory": "packages/icons"
   },
-  "type": "module",
   "author": "Armedin Kuka",
+  "type": "module",
   "license": "ISC",
   "keywords": [
     "react",
@@ -24,8 +24,10 @@
     "build:typings": "babel-node ./scripts/create-typings.js",
     "build:create-packages": "node ../../scripts/create-package.js",
     "build:node": "node ../../scripts/build stable",
+    "build:icon-template": "svgr svg --template ./scripts/create-icon.js",
     "prebuild": "rimraf build",
     "clean": "rimraf build",
+    "copy": "node ./scripts/copy-svgs.mjs",
     "release": "yarn build && npm publish build"
   },
   "peerDependencies": {
@@ -45,7 +47,10 @@
     "@babel/node": "^7.14.9",
     "chalk": "^4.1.2",
     "fast-glob": "^3.2.11",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "@fortawesome/fontawesome-pro": "^6.1.1",
+    "@svgr/cli": "^6.2.1",
+    "cpy": "^9.0.1"
   },
   "publishConfig": {
     "access": "public"

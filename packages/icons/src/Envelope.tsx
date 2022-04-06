@@ -1,9 +1,14 @@
-import { createSvgIcon } from './utils';
+import React from 'react';
+import { SvgIcon, SvgIconProps } from '@kukui/ui';
 
-export default createSvgIcon(
-  <path
-    fill="currentColor"
-    d="M448 64H64C28.65 64 0 92.65 0 128v256c0 35.35 28.65 64 64 64h384c35.35 0 64-28.65 64-64V128C512 92.65 483.3 64 448 64zM64 96h384c17.64 0 32 14.36 32 32v36.01l-195.2 146.4c-17 12.72-40.63 12.72-57.63 0L32 164V128C32 110.4 46.36 96 64 96zM480 384c0 17.64-14.36 32-32 32H64c-17.64 0-32-14.36-32-32V203.1L208 336c14.12 10.61 31.06 16.02 48 16.02S289.9 346.6 304 336L480 203.1V384z"
-  ></path>,
-  '0 0 512 512'
+const SvgComponent = props => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" {...props}>
+    <path d="M0 128c0-35.35 28.65-64 64-64h384c35.3 0 64 28.65 64 64v256c0 35.3-28.7 64-64 64H64c-35.35 0-64-28.7-64-64V128zm32 0v39.9l195.6 143.4c16.9 12.4 39.9 12.4 56.8 0L480 167.9V128c0-17.7-14.3-32-32-32H63.1c-16.77 0-32 14.3-32 32h.9zm0 79.6V384c0 17.7 14.33 32 32 32h384c17.7 0 32-14.3 32-32V207.6L303.3 337.1a79.817 79.817 0 0 1-94.6 0L32 207.6z" />
+  </svg>
 );
+
+const SvgEnvelope = (props: SvgIconProps) => (
+  <SvgIcon component={SvgComponent} {...props} />
+);
+
+export default SvgEnvelope;

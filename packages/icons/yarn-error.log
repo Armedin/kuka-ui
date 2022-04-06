@@ -1,0 +1,91 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /Users/armedinkuka/Downloads/google-cloud-sdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/armedinkuka/Downloads/google-cloud-sdk/bin:/opt/homebrew/bin:/opt/homebrew/sbin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  14.18.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/armedinkuka/Desktop/Projects/kuka-ui/packages/icons/package.json: Unexpected string in JSON at position 855
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:310:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:321:13
+
+npm manifest: 
+  {
+    "name": "@kukui/icons",
+    "version": "1.0.10-test.0",
+    "private": false,
+    "main": "./src/index.ts",
+    "bugs": {
+      "url": "https://github.com/Armedin/kuka-ui/issues"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Armedin/kuka-ui.git",
+      "directory": "packages/icons"
+    },
+    "type": "module",
+    "author": "Armedin Kuka",
+    "license": "ISC",
+    "keywords": [
+      "react",
+      "react-component",
+      "icons"
+    ],
+    "scripts": {
+      "build": "mkdir build && yarn build:typings && yarn build:node && yarn build:create-packages",
+      "build:typings": "babel-node ./scripts/create-typings.js",
+      "build:create-packages": "node ../../scripts/create-package.js",
+      "build:node": "node ../../scripts/build stable",
+      "prebuild": "rimraf build",
+      "clean": "rimraf build",
+      "copy": "node ./scripts/copy-svgs.mjs"
+      "release": "yarn build && npm publish build"
+    },
+    "peerDependencies": {
+      "react": "^17.0.2"
+    },
+    "peerDependenciesMeta": {
+      "@types/react": {
+        "optional": true
+      }
+    },
+    "dependencies": {
+      "@babel/runtime": "^7.14.8"
+    },
+    "devDependencies": {
+      "@babel/cli": "^7.14.8",
+      "@babel/core": "^7.15.0",
+      "@babel/node": "^7.14.9",
+      "chalk": "^4.1.2",
+      "fast-glob": "^3.2.11",
+      "fs-extra": "^10.0.0",
+      "@fortawesome/fontawesome-pro": "^6.1.1",
+      "@svgr/cli": "^6.2.1"
+    },
+    "publishConfig": {
+      "access": "public"
+    },
+    "engines": {
+      "node": ">=12.0.0"
+    },
+    "types": "./src/index.d.ts",
+    "gitHead": "d2c10edcad9a9f1a8ded271c8a13117b789ea81c"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,0 +1,14 @@
+import React from 'react';
+import { SvgIcon, SvgIconProps } from '@kukui/ui';
+
+const SvgComponent = props => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" {...props}>
+    <path d="m208 247.4 40.9 27.3c7.3 4.9 9.3 14.8 4.4 22.2-4.9 7.3-14.8 9.3-22.2 4.4l-48-32c-4.4-3-7.1-8-7.1-13.3v-80c0-8.8 7.2-16 16-16s16 7.2 16 16v71.4zM64 65.6V48c0-26.51 21.49-48 48-48h160c26.5 0 48 21.49 48 48v17.6c36.5 7.41 64 39.7 64 78.4v224c0 38.7-27.5 70.1-64 78.4V464c0 26.5-21.5 48-48 48H112c-26.51 0-48-21.5-48-48v-17.6C27.48 438.1 0 406.7 0 368V144c0-38.7 27.48-70.99 64-78.4zM96 64h192V48c0-8.84-7.2-16-16-16H112c-8.8 0-16 7.16-16 16v16zm16 416h160c8.8 0 16-7.2 16-16v-16H96v16c0 8.8 7.2 16 16 16zM32 144v224c0 26.5 21.49 48 48 48h224c26.5 0 48-21.5 48-48V144c0-26.5-21.5-48-48-48H80c-26.51 0-48 21.5-48 48z" />
+  </svg>
+);
+
+const SvgWatchSmart = (props: SvgIconProps) => (
+  <SvgIcon component={SvgComponent} {...props} />
+);
+
+export default SvgWatchSmart;
