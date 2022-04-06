@@ -1,6 +1,6 @@
 {
   "name": "@kukui/icons",
-  "version": "1.0.10-test.0",
+  "version": "1.0.11-test.0",
   "private": false,
   "main": "./src/index.ts",
   "bugs": {
@@ -45,12 +45,12 @@
     "@babel/cli": "^7.14.8",
     "@babel/core": "^7.15.0",
     "@babel/node": "^7.14.9",
-    "chalk": "^4.1.2",
-    "fast-glob": "^3.2.11",
-    "fs-extra": "^10.0.0",
     "@fortawesome/fontawesome-pro": "^6.1.1",
     "@svgr/cli": "^6.2.1",
-    "cpy": "^9.0.1"
+    "chalk": "^4.1.2",
+    "cpy": "^9.0.1",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.0.0"
   },
   "publishConfig": {
     "access": "public"
