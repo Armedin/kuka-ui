@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-interface ButtonProps {
+interface IconButtonProps {
   color?: 'primary';
   fullWidth?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
   onClick?: () => void;
+  size?: 'inherit' | 'large' | 'medium' | 'small';
 }
 
-const SIconButton = styled('button')({
+const IconButtonRoot = styled('button')<IconButtonProps>(props => ({
   padding: '8px',
   height: '36px',
   width: '36px',
@@ -30,17 +31,31 @@ const SIconButton = styled('button')({
   color: 'inherit',
   fontFamily: 'inherit',
   fontWeight: 500,
-  fontSize: '1rem',
+  fontSize: '24px',
   borderRadius: '50%',
   border: 'none',
   backgroundColor: 'transparent',
   transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-});
 
-const IconButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+  },
+  ...(props.size === 'small' && {
+    fontSize: '18px',
+  }),
+  ...(props.size === 'large' && {
+    fontSize: '28px',
+  }),
+}));
+
+const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (inProps, ref) => {
-    const { children, ...other } = inProps;
-    return <SIconButton {...other}>{children}</SIconButton>;
+    const { children, size = 'medium', ...other } = inProps;
+    return (
+      <IconButtonRoot className="KukuiIconButton" size={size} {...other}>
+        {children}
+      </IconButtonRoot>
+    );
   }
 );
 

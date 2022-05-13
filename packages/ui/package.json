@@ -1,6 +1,6 @@
 {
   "name": "@kukui/ui",
-  "version": "1.0.12-testing.0",
+  "version": "1.0.13-testing.0",
   "description": "A dead-simple React UI library",
   "main": "./src/index.ts",
   "keywords": [

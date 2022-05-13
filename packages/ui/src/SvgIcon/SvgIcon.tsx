@@ -21,7 +21,6 @@ const SvgIconRoot = styled('svg')(
     userSelect: 'none',
   },
   props => ({
-    ...styledSx(props),
     ...(props.fontSize && {
       fontSize: {
         sm: '20px',
@@ -29,22 +28,17 @@ const SvgIconRoot = styled('svg')(
         lg: '35px',
       }[props.fontSize],
     }),
+    ...styledSx(props),
   })
 );
 
 const SvgIcon = React.forwardRef<any, SvgIconProps>((inProps, ref) => {
-  const {
-    component = 'svg',
-    viewBox = '0 0 320 512',
-    fontSize = 'md',
-    ...other
-  } = inProps;
+  const { component = 'svg', fontSize = 'md', ...other } = inProps;
 
   return (
     <SvgIconRoot
       as={component}
       focusable="false"
-      viewBox={viewBox}
       aria-hidden={true}
       role="img"
       fontSize={fontSize}

@@ -3,7 +3,9 @@ import styled from '@emotion/styled';
 import { shouldForwardProp } from '@kukui/system';
 
 export interface ButtonProps {
-  color?: 'primary';
+  color?: 'primary' | 'inherit';
+  variant?: 'text' | 'contained';
+  size?: 'small' | 'large';
   fullWidth?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
@@ -11,7 +13,7 @@ export interface ButtonProps {
   onClick?: () => void;
 }
 
-const IGNORED_PROPS = ['color'];
+const IGNORED_PROPS = ['color', 'fullWidth', 'variant', 'size'];
 
 export const StyledButton = styled('button', {
   shouldForwardProp: prop =>
@@ -44,24 +46,46 @@ export const StyledButton = styled('button', {
   ...(props.fullWidth && {
     width: '100%',
   }),
-  ...(props.color && {
-    backgroundColor: `var(--kukui-${props.color})`,
-    color: '#fff',
+  ...(props.color !== 'inherit' &&
+    props.variant === 'contained' && {
+      backgroundColor: `var(--kukui-${props.color})`,
+      color: '#fff',
+      '&:hover': {
+        backgroundColor: `var(--kukui-${props.color}-hover)`,
+      },
+    }),
+  ...(props.variant === 'text' && {
+    backgroundColor: `transparent`,
+    color: 'var(--kukui-text-default)',
     '&:hover': {
-      backgroundColor: `var(--kukui-${props.color}-hover)`,
+      backgroundColor: `var(--kukui-accent-50)`,
     },
   }),
+  ...(props.size === 'small' &&
+    props.variant === 'text' && {
+      padding: '6px 10px',
+      fontSize: '13px',
+    }),
 }));
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (inProps, ref) => {
-    const { children, className, disabled, ...other } = inProps;
+    const {
+      children,
+      variant = 'contained',
+      color = 'inherit',
+      className,
+      disabled,
+      ...other
+    } = inProps;
 
     return (
       <StyledButton
         ref={ref}
         className={className}
         disabled={disabled}
+        variant={variant}
+        color={color}
         {...other}
       >
         {children}
