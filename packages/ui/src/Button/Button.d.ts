@@ -1,6 +1,8 @@
 import React from 'react';
 export interface ButtonProps {
-    color?: 'primary';
+    color?: 'primary' | 'inherit';
+    variant?: 'text' | 'contained';
+    size?: 'small' | 'large';
     fullWidth?: boolean;
     disabled?: boolean;
     children?: React.ReactNode;
