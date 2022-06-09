@@ -13,7 +13,6 @@ export interface TextareaProps
 const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (inProps, ref) => {
     const { onChange, maxRows, minRows = 3, style, value, ...other } = inProps;
-
     return (
       <textarea
         value={value}

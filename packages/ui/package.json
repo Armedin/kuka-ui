@@ -49,6 +49,8 @@
   "dependencies": {
     "@types/react-transition-group": "^4.4.4",
     "clsx": "^1.1.1",
+    "react-currency-input-field": "^3.6.4",
+    "react-hook-form": "^7.31.3",
     "react-transition-group": "^4.4.2"
   },
   "publishConfig": {

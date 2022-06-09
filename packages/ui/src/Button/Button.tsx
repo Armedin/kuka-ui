@@ -11,6 +11,7 @@ export interface ButtonProps {
   children?: React.ReactNode;
   className?: string;
   onClick?: () => void;
+  type?: 'button' | 'reset' | 'submit';
 }
 
 const IGNORED_PROPS = ['color', 'fullWidth', 'variant', 'size'];
@@ -74,6 +75,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       variant = 'contained',
       color = 'inherit',
+      type = 'submit',
       className,
       disabled,
       ...other
@@ -86,6 +88,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled}
         variant={variant}
         color={color}
+        type={type}
         {...other}
       >
         {children}

@@ -1,6 +1,9 @@
 export { default as Input } from './Input';
 export * from './Input';
 
+export { default as CurrencyInput } from './CurrencyInput';
+export * from './CurrencyInput';
+
 export { default as Button } from './Button';
 export * from './Button';
 
@@ -24,6 +27,9 @@ export * from './SvgIcon';
 
 export { default as Table } from './Table';
 export * from './Table';
+
+export { default as FormContainer } from './FormContainer';
+export * from './FormContainer';
 
 export * from './Card';
 
