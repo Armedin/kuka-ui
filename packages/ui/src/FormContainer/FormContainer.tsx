@@ -1,5 +1,10 @@
-import React, { FormHTMLAttributes } from 'react';
-import { FormProvider, useForm, UseFormReturn } from 'react-hook-form';
+import React, { FormHTMLAttributes, useEffect } from 'react';
+import {
+  FormProvider,
+  useForm,
+  UseFormReturn,
+  FieldError,
+} from 'react-hook-form';
 
 export interface FormContainerProps {
   defaultValues?: any;
@@ -8,6 +13,7 @@ export interface FormContainerProps {
   handleSubmit?: (values: any) => void;
   formContext?: UseFormReturn<any>;
   FormProps?: FormHTMLAttributes<HTMLFormElement>;
+  shouldFocusError?: boolean;
 }
 
 const FormContainer = React.forwardRef<HTMLFormElement, FormContainerProps>(
@@ -17,12 +23,31 @@ const FormContainer = React.forwardRef<HTMLFormElement, FormContainerProps>(
       onSuccess = () => {},
       children,
       FormProps,
+      shouldFocusError = true,
     } = inProps;
 
     const methods = useForm<typeof defaultValues>({
       defaultValues,
     });
-    const { handleSubmit } = methods;
+    const {
+      handleSubmit,
+      setFocus,
+      formState: { errors },
+    } = methods;
+
+    useEffect(() => {
+      if (!shouldFocusError) {
+        return;
+      }
+
+      const firstError = Object.keys(errors).reduce((field, a) => {
+        return !!errors[field] ? field : a;
+      }, null);
+
+      if (firstError) {
+        setFocus(firstError);
+      }
+    }, [shouldFocusError, errors, setFocus]);
 
     return (
       <FormProvider {...methods}>

@@ -21,7 +21,7 @@ const ValidationInput = ({
       control={control}
       rules={validation}
       render={({
-        field: { value, onChange, onBlur },
+        field: { value, onChange, onBlur, ref },
         fieldState: { invalid, error },
       }) => {
         const NewInput = React.cloneElement(InputComponent, {
@@ -35,6 +35,7 @@ const ValidationInput = ({
           }),
           helperText: error ? error.message : input.props.helperText,
           error: error ? true : false,
+          ref,
         });
         return NewInput;
       }}

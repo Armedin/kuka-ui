@@ -75,7 +75,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       variant = 'contained',
       color = 'inherit',
-      type = 'submit',
+      type = 'button',
       className,
       disabled,
       ...other
