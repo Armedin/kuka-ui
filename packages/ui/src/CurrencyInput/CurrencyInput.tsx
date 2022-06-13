@@ -11,7 +11,7 @@ import AmountField, {
 } from 'react-currency-input-field';
 
 export interface CurrencyInputProps
-  extends Omit<AmountFieldProps, 'prefix' | 'suffix'> {
+  extends Omit<AmountFieldProps, 'prefix' | 'suffix' | 'onChange'> {
   type?: 'text' | 'number' | 'email' | 'password';
   id?: string;
   className?: string;

@@ -28,6 +28,7 @@ const FormContainer = React.forwardRef<HTMLFormElement, FormContainerProps>(
 
     const methods = useForm<typeof defaultValues>({
       defaultValues,
+      shouldUnregister: false,
     });
     const {
       handleSubmit,

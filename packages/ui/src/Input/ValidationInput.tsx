@@ -22,15 +22,18 @@ const ValidationInput = ({
       rules={validation}
       render={({
         field: { value, onChange, onBlur, ref },
-        fieldState: { invalid, error },
+        fieldState: { error },
       }) => {
         const NewInput = React.cloneElement(InputComponent, {
           ...{ onChange },
           ...{ onBlur },
           value: value,
           // For Currency Input
-          ...(input.props.onValueChange && {
-            onValueChange: (value: any) => onChange(value),
+          ...('onValueChange' in input.props && {
+            onValueChange: (value: any) => {
+              onChange(value);
+              input.props.onValueChange(value);
+            },
             value: undefined,
           }),
           helperText: error ? error.message : input.props.helperText,

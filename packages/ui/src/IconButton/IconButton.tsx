@@ -52,7 +52,12 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   (inProps, ref) => {
     const { children, size = 'medium', ...other } = inProps;
     return (
-      <IconButtonRoot className="KukuiIconButton" size={size} {...other}>
+      <IconButtonRoot
+        type="button"
+        className="KukuiIconButton"
+        size={size}
+        {...other}
+      >
         {children}
       </IconButtonRoot>
     );

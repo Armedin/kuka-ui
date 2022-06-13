@@ -28,8 +28,17 @@ export * from './SvgIcon';
 export { default as Table } from './Table';
 export * from './Table';
 
+export { default as SnackbarProvider } from './Snackbar';
+export * from './Snackbar';
+
 export { default as FormContainer } from './FormContainer';
 export * from './FormContainer';
+
+export { default as Radio } from './Radio';
+export * from './Radio';
+
+export { default as Badge } from './Badge';
+export * from './Badge';
 
 export * from './Card';
 
