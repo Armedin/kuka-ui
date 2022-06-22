@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { ArrowDownSolid } from '../lib';
+import { ArrowDownSolid } from '../lib/icons';
 
 export interface TableSortableLabelProps {
   active?: boolean;

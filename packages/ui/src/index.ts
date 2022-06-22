@@ -1,6 +1,18 @@
 export { default as Input } from './Input';
 export * from './Input';
 
+export { default as Select } from './Select';
+export * from './Select';
+
+export { default as Popper } from './Popper';
+export * from './Popper';
+
+export { default as Menu } from './Menu';
+export * from './Menu';
+
+export { default as MenuItem } from './MenuItem';
+export * from './MenuItem';
+
 export { default as CurrencyInput } from './CurrencyInput';
 export * from './CurrencyInput';
 

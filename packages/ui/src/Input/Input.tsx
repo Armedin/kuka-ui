@@ -8,7 +8,7 @@ import ValidationInput from './ValidationInput';
 import FormHelperText from '../FormHelperText';
 import { shouldForwardProp } from '@kukui/system';
 
-interface InputProps {
+export interface InputProps {
   type?: 'text' | 'number' | 'email' | 'password';
   id?: string;
   className?: string;
@@ -23,12 +23,14 @@ interface InputProps {
   textarea?: boolean;
   helperText?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  onClick?: (event: any) => void;
   onFocus?: any;
   onBlur?: any;
   validation?: ControllerProps['rules'];
   control?: Control<any>;
   required?: boolean;
   error?: boolean;
+  inputRef?: any;
 }
 
 const FieldWrapper = styled.div`
@@ -118,7 +120,7 @@ const StyledLabel = styled.label`
   color: var(--kukui-text-default);
 `;
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
+const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
   const {
     type = 'text',
     id,
@@ -130,10 +132,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
     placeholder,
     name,
     helperText,
+    onClick,
     onChange,
     onBlur,
     onFocus,
     validation = {},
+    inputRef,
     prefix,
     suffix,
     control,
@@ -144,14 +148,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
 
   const [focused, setFocused] = useState(false);
 
-  const handleFocus = () => {
+  const handleFocus = (event: any) => {
     setFocused(true);
-    onFocus?.();
+    onFocus?.(event);
   };
 
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     setFocused(false);
-    onBlur?.();
+    onBlur?.(e);
   };
 
   if (required) {
@@ -185,21 +189,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
   const FinalComponent = (
     <FieldWrapper className={clsx('KukuiFieldWrapper', label && 'has-label')}>
       <InputWrapper
+        ref={ref}
         className={clsx(
           'KukuiInputWrapper',
           focused && 'focused',
           error && 'invalid'
         )}
+        onClick={onClick}
       >
         {prefix && (
           <InputPrefixSuffix type="prefix">{prefix}</InputPrefixSuffix>
         )}
         <InputRoot
-          ref={ref}
           className={clsx('KukuiInput', className)}
           value={value}
           id={id}
           type={type}
+          ref={inputRef}
           placeholder={placeholder}
           textarea={textarea}
           onChange={onChange}
@@ -245,6 +251,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>((inProps, ref) => {
             required,
             textarea,
             helperText,
+            inputRef,
           }}
         />
       }

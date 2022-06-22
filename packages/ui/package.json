@@ -47,6 +47,7 @@
     }
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.5",
     "@types/react-transition-group": "^4.4.4",
     "clsx": "^1.1.1",
     "react-currency-input-field": "^3.6.4",

@@ -42,6 +42,8 @@ const IconButtonRoot = styled('button')<IconButtonProps>(props => ({
   },
   ...(props.size === 'small' && {
     fontSize: '18px',
+    width: '28px',
+    height: '28px',
   }),
   ...(props.size === 'large' && {
     fontSize: '28px',
