@@ -51,7 +51,7 @@ const filterOptions = (
   });
 
   if (filteredOptions.length === 0 && value !== '' && isCreatable) {
-    const title = `Add "${value}"`;
+    const title = `Add "${inputValue}"`;
     filteredOptions.push({ label: title, value: inputValue, inputValue });
   }
 
@@ -199,24 +199,24 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
         />
       </SelectRoot>
       {popupOpen && anchorEl.current && (
-        <Popper
+        <Menu
+          open
           anchorEl={anchorEl.current}
+          closeOnClickAway={false}
           style={{
+            maxHeight: '40vh',
+            overflow: 'auto',
+            boxShadow:
+              'rgb(0 0 0 / 10%) 0px 8px 16px, rgb(0 0 0 / 10%) 0px 3px 8px',
             width: anchorEl.current.clientWidth,
           }}
+          onMouseDown={(event: any) => {
+            event.preventDefault();
+          }}
+          ref={menuRef}
         >
-          <Menu
-            style={{ maxHeight: '40vh', overflow: 'auto' }}
-            onMouseDown={(event: any) => {
-              event.preventDefault();
-            }}
-            ref={menuRef}
-          >
-            {filteredOptions.map((option, index) =>
-              renderOption(option, index)
-            )}
-          </Menu>
-        </Popper>
+          {filteredOptions.map((option, index) => renderOption(option, index))}
+        </Menu>
       )}
     </React.Fragment>
   );

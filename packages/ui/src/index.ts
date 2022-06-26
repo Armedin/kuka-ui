@@ -7,6 +7,9 @@ export * from './Select';
 export { default as Popper } from './Popper';
 export * from './Popper';
 
+export { default as ClickAwayListener } from './ClickAwayListener';
+export * from './ClickAwayListener';
+
 export { default as Menu } from './Menu';
 export * from './Menu';
 

@@ -10,7 +10,7 @@ export interface ButtonProps {
   disabled?: boolean;
   children?: React.ReactNode;
   className?: string;
-  onClick?: () => void;
+  onClick?: (event: any) => void;
   type?: 'button' | 'reset' | 'submit';
 }
 
