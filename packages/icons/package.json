@@ -1,6 +1,6 @@
 {
   "name": "@kukui/icons",
-  "version": "1.0.12-test.0",
+  "version": "1.0.13-test.0",
   "private": false,
   "main": "./src/index.ts",
   "bugs": {

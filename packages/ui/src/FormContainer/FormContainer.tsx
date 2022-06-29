@@ -41,7 +41,7 @@ const FormContainer = React.forwardRef<HTMLFormElement, FormContainerProps>(
         return;
       }
 
-      const firstError = Object.keys(errors).reduce((field, a) => {
+      const firstError = Object.keys(errors).reduce((field: any, a: any) => {
         return !!errors[field] ? field : a;
       }, null);
 

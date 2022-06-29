@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useForkRef } from '../utils';
 
 export interface ClickAwayListenerProps {
-  children: React.ReactElement;
+  children: any; // should really be React.ReactElement
   onClickAway?: () => void;
 }
 
@@ -28,7 +28,8 @@ const ClickAwayListener = (props: ClickAwayListenerProps) => {
     };
   }, []);
 
-  const handleClickEvent = useCallback((event: MouseEvent | TouchEvent) => {
+  // should be event: MouseEvent | TouchEvent
+  const handleClickEvent = useCallback((event: any) => {
     // Ignore clicks on scrollbar
     if (
       !activatedRef.current ||
