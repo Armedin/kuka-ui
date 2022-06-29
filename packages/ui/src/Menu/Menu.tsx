@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import clsx from 'clsx';
 import React from 'react';
 import Popper, { PopperProps } from '../Popper';
 
@@ -29,6 +30,7 @@ const Menu = React.forwardRef<any, MenuProps>((inProps, ref) => {
     PopperProps,
     onClose,
     closeOnClickAway = true,
+    className,
     ...other
   } = inProps;
 
@@ -48,7 +50,9 @@ const Menu = React.forwardRef<any, MenuProps>((inProps, ref) => {
       onClickAway={handleClickAway}
       {...PopperProps}
     >
-      <MenuRoot {...other}>{children}</MenuRoot>
+      <MenuRoot className={clsx('KukuiMenu', className)} {...other}>
+        {children}
+      </MenuRoot>
     </Popper>
   ) : (
     <></>

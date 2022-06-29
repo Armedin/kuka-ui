@@ -37,6 +37,7 @@ const SvgIcon = React.forwardRef<any, SvgIconProps>((inProps, ref) => {
 
   return (
     <SvgIconRoot
+      className="KukuiSvgIcon"
       as={component}
       focusable="false"
       aria-hidden={true}

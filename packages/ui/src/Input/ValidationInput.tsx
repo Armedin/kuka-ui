@@ -34,7 +34,7 @@ const ValidationInput = ({
               onChange(value);
               input.props.onValueChange(value);
             },
-            value: undefined,
+            value: input.props.value, // using the value from above causes things like 12,3454
           }),
           helperText: error ? error.message : input.props.helperText,
           error: error ? true : false,

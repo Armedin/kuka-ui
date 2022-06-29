@@ -217,6 +217,7 @@ const CurrencyInput = React.forwardRef<HTMLInputElement, CurrencyInputProps>(
               required,
               helperText,
               onValueChange,
+              value,
             }}
           />
         }

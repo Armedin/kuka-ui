@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import { createPopper } from '@popperjs/core';
-import { forwardRef, useEffect, useRef } from 'react';
+import { forwardRef, useEffect, useRef, useState } from 'react';
 import ClickAwayListener from '../ClickAwayListener';
+import Portal from '../Portal';
 import { useForkRef } from '../utils';
 
 export interface PopperProps {
@@ -40,12 +41,44 @@ const Popper = forwardRef<HTMLElement, PopperProps>((inProps, ref) => {
     anchorEl,
     style,
     open,
-    placement = 'bottom',
+    placement: initialPlacement = 'bottom',
     onClickAway,
   } = inProps;
+  const [placement, setPlacement] = useState(initialPlacement);
   const tooltipRef = useRef(null);
   const finalTooltipRef = useForkRef(tooltipRef, ref);
   const popperRef = useRef<any | null>(null);
+
+  if (!open) {
+    return null;
+  }
+
+  // const handlePopperUpdate = data => {
+  //   setPlacement(data.placement);
+  // };
+
+  // let popperModifiers = [
+  //   {
+  //     name: 'preventOverflow',
+  //     options: {
+  //       altBoundary: false,
+  //     },
+  //   },
+  //   {
+  //     name: 'flip',
+  //     options: {
+  //       altBoundary: false,
+  //     },
+  //   },
+  //   {
+  //     name: 'onUpdate',
+  //     enabled: true,
+  //     phase: 'afterWrite',
+  //     fn: ({ state }) => {
+  //       handlePopperUpdate(state);
+  //     },
+  //   },
+  // ];
 
   useEffect(() => {
     if (popperRef.current) {
@@ -58,7 +91,9 @@ const Popper = forwardRef<HTMLElement, PopperProps>((inProps, ref) => {
       return;
     }
 
-    const popper = createPopper(anchorEl, tooltipRef.current!, { placement });
+    const popper = createPopper(anchorEl, tooltipRef.current!, {
+      placement,
+    });
 
     return () => {
       popper.destroy();
@@ -66,16 +101,18 @@ const Popper = forwardRef<HTMLElement, PopperProps>((inProps, ref) => {
   }, [anchorEl, open]);
 
   return (
-    <ClickAwayListener onClickAway={onClickAway}>
-      <PopperRoot
-        ref={finalTooltipRef}
-        role="tooltip"
-        className="KukuiPopper"
-        style={style}
-      >
-        {children}
-      </PopperRoot>
-    </ClickAwayListener>
+    <Portal>
+      <ClickAwayListener onClickAway={onClickAway}>
+        <PopperRoot
+          ref={finalTooltipRef}
+          role="tooltip"
+          className="KukuiPopper"
+          style={style}
+        >
+          {children}
+        </PopperRoot>
+      </ClickAwayListener>
+    </Portal>
   );
 });
 

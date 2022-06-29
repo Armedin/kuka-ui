@@ -18,7 +18,7 @@ const MenuItem = React.forwardRef<HTMLLIElement, HTMLAttributes<any>>(
     const { children, ...other } = inProps;
 
     return (
-      <MenuItemRoot ref={ref} {...other}>
+      <MenuItemRoot ref={ref} className="KukuiMenuItem" {...other}>
         {children}
       </MenuItemRoot>
     );

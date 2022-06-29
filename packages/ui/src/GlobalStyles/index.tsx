@@ -26,6 +26,11 @@ const GlobalStyles = () => {
           --kukui-primary: #4f46e5;
           --kukui-primary-rbg: 79, 70, 229;
           --kukui-primary-hover: #473fce;
+          --kukui-primary-text: #fff;
+
+          --kukui-secondary: #f3f6f9;
+          --kukui-secondary-hover: #e4e6ef;
+          --kukui-secondary-text: #7e8299;
 
           --kukui-accent-50: #f8fafc;
           --kukui-accent-100: #f1f5f9;

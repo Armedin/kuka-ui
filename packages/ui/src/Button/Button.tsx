@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { shouldForwardProp } from '@kukui/system';
+import { shouldForwardProp, styledSx, SxProps } from '@kukui/system';
 
 export interface ButtonProps {
-  color?: 'primary' | 'inherit';
+  color?: 'primary' | 'secondary' | 'inherit';
+  sx?: SxProps;
   variant?: 'text' | 'contained';
   size?: 'small' | 'large';
   fullWidth?: boolean;
@@ -50,7 +51,7 @@ export const StyledButton = styled('button', {
   ...(props.color !== 'inherit' &&
     props.variant === 'contained' && {
       backgroundColor: `var(--kukui-${props.color})`,
-      color: '#fff',
+      color: `var(--kukui-${props.color}-text)`,
       '&:hover': {
         backgroundColor: `var(--kukui-${props.color}-hover)`,
       },
@@ -67,6 +68,7 @@ export const StyledButton = styled('button', {
       padding: '6px 10px',
       fontSize: '13px',
     }),
+  ...styledSx(props),
 }));
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

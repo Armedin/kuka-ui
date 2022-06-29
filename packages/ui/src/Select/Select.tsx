@@ -18,6 +18,8 @@ export interface Option {
 export interface SelectProps {
   id?: string;
   options?: Option[];
+  value?: Option;
+  inputValue?: string;
   className?: string;
   name?: string;
   placeholder?: string;
@@ -66,6 +68,8 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     onChange,
     onCreateOption,
     isCreatable = false,
+    value: valueProp,
+    inputValue: inputValueProp,
   } = inProps;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -73,8 +77,21 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   const menuRef = useRef<HTMLElement>(null);
   const [popupOpen, setPopupOpen] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState<Option | null>(null);
-  const [inputValue, setInputValue] = useState('');
+  const [value, setValue] = useState<Option | null>(valueProp ?? null);
+  const [inputValue, setInputValue] = useState(inputValueProp ?? '');
+
+  useEffect(() => {
+    if (valueProp) {
+      setValue(valueProp);
+      setInputValue(getOptionLabel(valueProp));
+    }
+  }, [valueProp]);
+
+  useEffect(() => {
+    if (inputValueProp) {
+      setInputValue(inputValueProp);
+    }
+  }, [inputValueProp]);
 
   const filteredOptions = popupOpen
     ? filterOptions(options, { inputValue, isCreatable })
@@ -90,6 +107,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     }
     return option.label;
   };
+
   const handleOpen = (event: any) => {
     if (popupOpen) {
       return;
