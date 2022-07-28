@@ -1,4 +1,3 @@
-/// <reference types="react" />
 export interface BadgeProps {
     color?: 'primary' | 'error' | 'info' | 'success' | 'warning';
     content?: string;
