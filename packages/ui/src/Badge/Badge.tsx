@@ -21,6 +21,8 @@ const BadgeRoot = styled('div', {
   borderRadius: '0.325rem',
   display: 'inline-flex',
   alignItems: 'center',
+  backgroundColor: 'var(--kukui-accent-100)',
+  color: 'var(--kukui-accent-500)',
   ...(props.color === 'success' && {
     backgroundColor: 'var(--kukui-lime-100)',
     color: 'var(--kukui-lime-800)',
@@ -29,7 +31,11 @@ const BadgeRoot = styled('div', {
 const Badge = (props: BadgeProps) => {
   const { content, color } = props;
 
-  return <BadgeRoot color={color}>{content}</BadgeRoot>;
+  return (
+    <BadgeRoot className="KukuiBadge" color={color}>
+      {content}
+    </BadgeRoot>
+  );
 };
 
 export default Badge;
