@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import { SxProps } from '@kukui/system';
-export interface ButtonProps {
+export interface ButtonProps extends HTMLAttributes<any> {
     color?: 'primary' | 'secondary' | 'inherit';
     sx?: SxProps;
     variant?: 'text' | 'contained';

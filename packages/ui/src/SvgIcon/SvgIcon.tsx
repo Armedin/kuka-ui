@@ -6,6 +6,7 @@ export interface SvgIconProps {
   component?: React.ElementType;
   children?: React.ReactChild;
   className?: string;
+  onClick?: () => void;
   sx?: SxProps;
   viewBox?: string;
   fontSize?: 'inherit' | 'lg' | 'md' | 'sm';

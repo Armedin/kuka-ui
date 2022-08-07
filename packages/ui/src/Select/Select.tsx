@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import React, { useCallback, useRef, useState } from 'react';
 import { useEffect } from 'react';
+import Badge from '../Badge';
 import IconButton from '../IconButton';
 import Input from '../Input';
 import { ChevronDownSolid } from '../lib/icons';
 import Menu from '../Menu';
 import MenuItem from '../MenuItem';
-import Popper from '../Popper';
 import { scrollIntoView } from '../utils';
 
 export interface Option {
@@ -18,7 +18,8 @@ export interface Option {
 export interface SelectProps {
   id?: string;
   options?: Option[];
-  value?: Option;
+  // value?: string | string[] | Option | null;
+  value?: any;
   inputValue?: string;
   className?: string;
   name?: string;
@@ -32,9 +33,28 @@ export interface SelectProps {
   onChange?: (event: any, value: string) => void;
   onCreateOption?: (value: string) => void;
   isCreatable?: boolean;
+  multiple?: boolean;
 }
 
-const SelectRoot = styled('div')({});
+const SelectRoot = styled('div')({
+  ['& .KukuiBadge']: {
+    margin: 3,
+    maxWidth: 'calc(100% - 6px)',
+  },
+  ['& .KukuiInputWrapper']: {
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  ['& .KukuiInputPrefixSuffix']: {
+    flexWrap: 'wrap',
+  },
+  ['& .KukuiInput']: {
+    flexGrow: 1,
+    textOverflow: 'ellipsis',
+    width: 0,
+    minWidth: 30,
+  },
+});
 
 const SelectIcon = styled('svg')({
   color: '#a5afbd',
@@ -67,9 +87,11 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     helperText,
     onChange,
     onCreateOption,
+    placeholder = 'Select category...',
     isCreatable = false,
     value: valueProp,
     inputValue: inputValueProp,
+    multiple = false,
   } = inProps;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -77,15 +99,11 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   const menuRef = useRef<HTMLElement>(null);
   const [popupOpen, setPopupOpen] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState<Option | null>(valueProp ?? null);
+  const [value, setValue] = useState<any>(valueProp ?? null);
   const [inputValue, setInputValue] = useState(inputValueProp ?? '');
 
-  useEffect(() => {
-    if (valueProp) {
-      setValue(valueProp);
-      setInputValue(getOptionLabel(valueProp));
-    }
-  }, [valueProp]);
+  const inputValueIsSelectedValue =
+    !multiple && value != null && inputValue === value;
 
   useEffect(() => {
     if (inputValueProp) {
@@ -94,10 +112,33 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   }, [inputValueProp]);
 
   const filteredOptions = popupOpen
-    ? filterOptions(options, { inputValue, isCreatable })
+    ? filterOptions(
+        options.filter(option => {
+          // Exclude already selected options
+          if (
+            multiple &&
+            value.some(
+              (value2: any) => value2 !== null && option.value === value2
+            )
+          ) {
+            return false;
+          }
+          return true;
+        }),
+        // options,
+        { inputValue: inputValueIsSelectedValue ? '' : inputValue, isCreatable }
+      )
     : [];
 
-  const getOptionLabel = (option: Option) => {
+  const getOptionValue = (option: Option | string) => {
+    if (typeof option === 'string') {
+      return option;
+    }
+
+    return option.value;
+  };
+
+  const getOptionLabel = (option: Option | string) => {
     if (typeof option === 'string') {
       return option;
     }
@@ -107,6 +148,54 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     }
     return option.label;
   };
+
+  const isOptionEqualToValue = (
+    option: Option | string,
+    value: Option | string
+  ) => {
+    if (!value) {
+      return false;
+    }
+
+    if (typeof value === 'string') {
+      return getOptionValue(option) === value;
+    }
+
+    return getOptionValue(option) === value.value;
+  };
+
+  const resetInputValue = useCallback(
+    newValue => {
+      const isOptionSelected = multiple
+        ? value.length < newValue.length
+        : newValue !== null;
+
+      if (!isOptionSelected) {
+        return;
+      }
+
+      let newInputValue;
+      if (multiple) {
+        newInputValue = '';
+      } else if (newValue == null) {
+        newInputValue = '';
+      } else {
+        const optionLabel = getOptionLabel(newValue);
+        newInputValue = typeof optionLabel === 'string' ? optionLabel : '';
+      }
+
+      if (inputValue === newInputValue) {
+        return;
+      }
+
+      setInputValue(newInputValue);
+    },
+    [inputValue, multiple, value]
+  );
+
+  useEffect(() => {
+    resetInputValue(value);
+  }, [value]);
 
   const handleOpen = (event: any) => {
     if (popupOpen) {
@@ -146,13 +235,30 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   };
 
   const handleOptionClick = (event: any, option: Option) => {
-    setValue(option);
-    setInputValue(getOptionLabel(option));
-    if (onChange) {
-      onChange(event, option.value);
+    let newValue: any = getOptionValue(option);
+
+    if (multiple) {
+      newValue = Array.isArray(value) ? value.slice() : [];
+      const itemIndex = newValue.findIndex((valueItem: any) =>
+        isOptionEqualToValue(option, valueItem)
+      );
+
+      if (itemIndex === -1) {
+        newValue.push(getOptionValue(option));
+      } else {
+        newValue.splice(itemIndex, 1);
+      }
     }
+
+    resetInputValue(newValue);
+    setValue(newValue);
+
+    if (onChange) {
+      onChange(event, newValue);
+    }
+
     if (option.inputValue && onCreateOption) {
-      onCreateOption(option.value);
+      onCreateOption(getOptionValue(option));
     }
     inputRef.current?.blur();
   };
@@ -162,7 +268,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
       tabIndex: -1,
       role: 'option',
       onClick: (event: any) => handleOptionClick(event, option),
-      'aria-selected': option === value,
+      'aria-selected': isOptionEqualToValue(option, value),
       'data-option-index': index,
     };
 
@@ -173,12 +279,14 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     );
   };
 
-  const sync = useCallback(() => {
+  const syncHighlightedOption = useCallback(() => {
     if (!popupOpen || !menuRef.current || !value) {
       return;
     }
 
-    const selectedOptionIndex = options.findIndex(option => option === value);
+    const selectedOptionIndex = options.findIndex(option =>
+      isOptionEqualToValue(option, value)
+    );
 
     if (selectedOptionIndex !== -1) {
       const selectedOption: HTMLElement | null = menuRef.current.querySelector(
@@ -192,8 +300,33 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   }, [value, popupOpen, inputValue]);
 
   useEffect(() => {
-    sync();
-  }, [sync]);
+    syncHighlightedOption();
+  }, [syncHighlightedOption]);
+
+  const handleBadgeRemove = (index: number) => () => {
+    const newValue = value.slice();
+    newValue.splice(index, 1);
+    setValue(newValue);
+  };
+
+  const renderBadge = (option: any, index: number) => {
+    const badgeOptions = {
+      tabIndex: -1,
+      onRemove: handleBadgeRemove(index),
+      'data-badge-index': index,
+    };
+    return (
+      <Badge key={index} content={getOptionLabel(option)} {...badgeOptions} />
+    );
+  };
+
+  let prefix;
+
+  if (multiple && value.length > 0) {
+    prefix = value.map((option: any, index: number) =>
+      renderBadge(option, index)
+    );
+  }
 
   return (
     <React.Fragment>
@@ -201,12 +334,13 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
         <Input
           ref={anchorEl}
           inputRef={inputRef}
-          placeholder="Select category..."
+          placeholder={placeholder}
           label={label}
           helperText={helperText}
           value={inputValue}
           onClick={handleClick}
           onChange={handleInputChange}
+          prefix={prefix}
           suffix={
             <IconButton size="small">
               <SelectIcon className="KukuiSelectIcon" as={ChevronDownSolid} />
@@ -227,6 +361,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
             boxShadow:
               'rgb(0 0 0 / 10%) 0px 8px 16px, rgb(0 0 0 / 10%) 0px 3px 8px',
             width: anchorEl.current.clientWidth,
+            fontSize: 14,
           }}
           onMouseDown={(event: any) => {
             event.preventDefault();

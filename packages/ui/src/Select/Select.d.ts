@@ -7,7 +7,7 @@ export interface Option {
 export interface SelectProps {
     id?: string;
     options?: Option[];
-    value?: Option;
+    value?: any;
     inputValue?: string;
     className?: string;
     name?: string;
@@ -21,6 +21,7 @@ export interface SelectProps {
     onChange?: (event: any, value: string) => void;
     onCreateOption?: (value: string) => void;
     isCreatable?: boolean;
+    multiple?: boolean;
 }
 declare const Select: React.ForwardRefExoticComponent<SelectProps & React.RefAttributes<any>>;
 export default Select;

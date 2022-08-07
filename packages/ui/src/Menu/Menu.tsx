@@ -45,12 +45,11 @@ const Menu = React.forwardRef<any, MenuProps>((inProps, ref) => {
   return open ? (
     <Popper
       anchorEl={anchorEl}
-      ref={ref}
       open={open}
       onClickAway={handleClickAway}
       {...PopperProps}
     >
-      <MenuRoot className={clsx('KukuiMenu', className)} {...other}>
+      <MenuRoot className={clsx('KukuiMenu', className)} ref={ref} {...other}>
         {children}
       </MenuRoot>
     </Popper>

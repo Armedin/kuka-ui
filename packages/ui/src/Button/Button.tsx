@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import styled from '@emotion/styled';
 import { shouldForwardProp, styledSx, SxProps } from '@kukui/system';
+import clsx from 'clsx';
 
-export interface ButtonProps {
+export interface ButtonProps extends HTMLAttributes<any> {
   color?: 'primary' | 'secondary' | 'inherit';
   sx?: SxProps;
   variant?: 'text' | 'contained';
@@ -86,7 +87,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <StyledButton
         ref={ref}
-        className={className}
+        className={clsx('KukuiButton', className)}
         disabled={disabled}
         variant={variant}
         color={color}
