@@ -18,7 +18,7 @@ export interface SelectProps {
     helperText?: string;
     required?: boolean;
     error?: boolean;
-    onChange?: (event: any, value: string) => void;
+    onChange?: (event: any, value: string | string[]) => void;
     onCreateOption?: (value: string) => void;
     isCreatable?: boolean;
     multiple?: boolean;

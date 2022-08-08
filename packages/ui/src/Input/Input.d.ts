@@ -23,6 +23,7 @@ export interface InputProps {
     required?: boolean;
     error?: boolean;
     inputRef?: any;
+    isControlled?: boolean;
 }
 declare const Input: React.ForwardRefExoticComponent<InputProps & React.RefAttributes<any>>;
 export default Input;

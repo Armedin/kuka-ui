@@ -57,4 +57,7 @@ export * from './Badge';
 
 export * from './Card';
 
+export { default as Skeleton } from './Skeleton';
+export * from './Skeleton';
+
 export { default as GlobalStyles } from './GlobalStyles';

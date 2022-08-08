@@ -30,7 +30,7 @@ export interface SelectProps {
   helperText?: string;
   required?: boolean;
   error?: boolean;
-  onChange?: (event: any, value: string) => void;
+  onChange?: (event: any, value: string | string[]) => void;
   onCreateOption?: (value: string) => void;
   isCreatable?: boolean;
   multiple?: boolean;
@@ -99,7 +99,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   const menuRef = useRef<HTMLElement>(null);
   const [popupOpen, setPopupOpen] = useState(false);
   const [focused, setFocused] = useState(false);
-  const [value, setValue] = useState<any>(valueProp ?? null);
+  const [value, setValue] = useState<any>(valueProp || (multiple ? [] : null));
   const [inputValue, setInputValue] = useState(inputValueProp ?? '');
 
   const inputValueIsSelectedValue =
@@ -307,6 +307,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     const newValue = value.slice();
     newValue.splice(index, 1);
     setValue(newValue);
+    onChange?.(null, newValue);
   };
 
   const renderBadge = (option: any, index: number) => {

@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import { styledSx, SxProps } from '@kukui/system';
 
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
-export interface BoxProps {
+export interface BoxProps extends HTMLAttributes<any> {
   component?: React.ElementType;
   className?: string;
   sx?: SxProps;

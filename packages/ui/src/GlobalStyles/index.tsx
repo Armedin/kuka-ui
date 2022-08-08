@@ -32,6 +32,12 @@ const GlobalStyles = () => {
           --kukui-secondary-hover: #e4e6ef;
           --kukui-secondary-text: #7e8299;
 
+          /* --kukui-skeleton-bg: #f2f2f2; */
+          --kukui-skeleton-bg: var(--kukui-accent-100);
+          --kukui-skeleton-bg-shimmer: #fefefe;
+          --kukui-skeleton-shimmer-offset: 250px;
+          --kukui-placeholder-shimmer-offset: 250px;
+
           --kukui-accent-50: #f8fafc;
           --kukui-accent-100: #f1f5f9;
           --kukui-accent-200: #e2e8f0;

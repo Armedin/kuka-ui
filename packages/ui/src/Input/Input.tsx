@@ -31,6 +31,7 @@ export interface InputProps {
   required?: boolean;
   error?: boolean;
   inputRef?: any;
+  isControlled?: boolean;
 }
 
 const FieldWrapper = styled.div`
@@ -137,6 +138,7 @@ const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
     onBlur,
     onFocus,
     validation = {},
+    isControlled = false,
     inputRef,
     prefix,
     suffix,
@@ -162,7 +164,7 @@ const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
     validation.required = 'This field is required';
   }
 
-  if (type === 'email') {
+  if (type === 'email' && !validation.pattern) {
     validation.pattern = {
       value:
         /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -178,8 +180,9 @@ const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
 
   // Name will be undefined when it comes from ValidationInput
   // Better to pass another prop instead; smth like isValidation = true
+  // if isControlled, use Validation Input
   const hasValidation =
-    Object.keys(validation).length > 0 && name !== undefined;
+    (Object.keys(validation).length > 0 || isControlled) && name !== undefined;
 
   let InputComponent = 'input' as any;
   if (textarea) {
