@@ -1,6 +1,6 @@
 import { SxProps } from '@kukui/system';
-import React from 'react';
-export interface CardContentProps {
+import React, { HTMLAttributes } from 'react';
+export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
     children?: React.ReactNode;
     sx?: SxProps;
 }

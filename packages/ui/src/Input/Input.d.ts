@@ -1,7 +1,7 @@
-import React, { ChangeEventHandler } from 'react';
+import React, { ChangeEventHandler, KeyboardEventHandler } from 'react';
 import { Control, ControllerProps } from 'react-hook-form';
 export interface InputProps {
-    type?: 'text' | 'number' | 'email' | 'password';
+    type?: 'text' | 'number' | 'email' | 'password' | 'search';
     id?: string;
     className?: string;
     value?: string;
@@ -16,6 +16,7 @@ export interface InputProps {
     helperText?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     onClick?: (event: any) => void;
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
     onFocus?: any;
     onBlur?: any;
     validation?: ControllerProps['rules'];

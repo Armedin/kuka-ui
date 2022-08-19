@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { SxProps, styledSx } from '@kukui/system';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
-export interface CardContentProps {
+export interface CardContentProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   sx?: SxProps;
 }

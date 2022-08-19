@@ -1,5 +1,10 @@
 import clsx from 'clsx';
-import React, { ChangeEventHandler, FocusEvent, useState } from 'react';
+import React, {
+  ChangeEventHandler,
+  FocusEvent,
+  KeyboardEventHandler,
+  useState,
+} from 'react';
 import styled from '@emotion/styled';
 import InputPrefixSuffix from '../InputPrefixSuffix';
 import Textarea from '../Textarea';
@@ -9,7 +14,7 @@ import FormHelperText from '../FormHelperText';
 import { shouldForwardProp } from '@kukui/system';
 
 export interface InputProps {
-  type?: 'text' | 'number' | 'email' | 'password';
+  type?: 'text' | 'number' | 'email' | 'password' | 'search';
   id?: string;
   className?: string;
   value?: string;
@@ -24,6 +29,7 @@ export interface InputProps {
   helperText?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onClick?: (event: any) => void;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   onFocus?: any;
   onBlur?: any;
   validation?: ControllerProps['rules'];
@@ -135,6 +141,7 @@ const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
     helperText,
     onClick,
     onChange,
+    onKeyDown,
     onBlur,
     onFocus,
     validation = {},
@@ -213,6 +220,7 @@ const Input = React.forwardRef<any, InputProps>((inProps, ref) => {
           textarea={textarea}
           onChange={onChange}
           onFocus={handleFocus}
+          onKeyDown={onKeyDown}
           onBlur={handleBlur}
           maxRows={maxRows}
           minRows={minRows}

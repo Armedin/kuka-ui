@@ -111,6 +111,10 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     }
   }, [inputValueProp]);
 
+  useEffect(() => {
+    setValue(valueProp);
+  }, [valueProp]);
+
   const filteredOptions = popupOpen
     ? filterOptions(
         options.filter(option => {
@@ -170,9 +174,9 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
         ? value.length < newValue.length
         : newValue !== null;
 
-      if (!isOptionSelected) {
-        return;
-      }
+      // if (!isOptionSelected) {
+      //   return;
+      // }
 
       let newInputValue;
       if (multiple) {
