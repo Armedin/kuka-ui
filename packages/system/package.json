@@ -1,6 +1,6 @@
 {
   "name": "@kukui/system",
-  "version": "1.0.18-test.0",
+  "version": "1.0.19-test.0",
   "description": "System utils for Kuka.",
   "main": "./src/index.ts",
   "scripts": {

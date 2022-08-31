@@ -1,6 +1,6 @@
 {
   "name": "@kukui/types",
-  "version": "1.0.11-test.0",
+  "version": "1.0.12-test.0",
   "description": "Types for Kuka.",
   "types": "./index.d.ts",
   "scripts": {

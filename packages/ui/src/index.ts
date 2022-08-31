@@ -60,4 +60,16 @@ export * from './Card';
 export { default as Skeleton } from './Skeleton';
 export * from './Skeleton';
 
+export { default as Tabs } from './Tabs';
+export * from './Tabs';
+
+export { default as TabContext } from './TabContext';
+export * from './TabContext';
+
+export { default as Tab } from './Tab';
+export * from './Tab';
+
+export { default as TabPanel } from './TabPanel';
+export * from './TabPanel';
+
 export { default as GlobalStyles } from './GlobalStyles';

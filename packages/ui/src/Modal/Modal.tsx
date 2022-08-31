@@ -2,6 +2,7 @@ import React from 'react';
 import { Transition } from 'react-transition-group';
 import styled from '@emotion/styled';
 import { IconButton } from '@kukui/ui';
+import { XMarkSolid } from '../lib/icons';
 
 interface ModalProps {
   open?: boolean;
@@ -107,7 +108,7 @@ const Modal = ({
             <ModalBody>
               <CloseButtonContainer>
                 <CloseButton onClick={onClose}>
-                  <i className="fal fa-times"></i>
+                  <XMarkSolid />
                 </CloseButton>
               </CloseButtonContainer>
               <Content>{children}</Content>
