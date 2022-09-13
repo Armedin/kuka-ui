@@ -101,9 +101,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   const [focused, setFocused] = useState(false);
   const [value, setValue] = useState<any>(valueProp || (multiple ? [] : null));
   const [inputValue, setInputValue] = useState(inputValueProp ?? '');
-
-  const inputValueIsSelectedValue =
-    !multiple && value != null && inputValue === value;
+  const [inputPristine, setInputPristine] = useState(true);
 
   useEffect(() => {
     if (inputValueProp) {
@@ -114,25 +112,6 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   useEffect(() => {
     setValue(valueProp);
   }, [valueProp]);
-
-  const filteredOptions = popupOpen
-    ? filterOptions(
-        options.filter(option => {
-          // Exclude already selected options
-          if (
-            multiple &&
-            value.some(
-              (value2: any) => value2 !== null && option.value === value2
-            )
-          ) {
-            return false;
-          }
-          return true;
-        }),
-        // options,
-        { inputValue: inputValueIsSelectedValue ? '' : inputValue, isCreatable }
-      )
-    : [];
 
   const getOptionValue = (option: Option | string) => {
     if (typeof option === 'string') {
@@ -168,6 +147,39 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     return getOptionValue(option) === value.value;
   };
 
+  // Get the option from the value
+  const getOptionFromValue = (value: string): Option => {
+    const selectedOption = options.find(item => item.value === value);
+    return selectedOption!;
+  };
+
+  const inputIsSelectedValue =
+    !multiple &&
+    value != null &&
+    inputValue === getOptionLabel(getOptionFromValue(value));
+
+  const filteredOptions = popupOpen
+    ? filterOptions(
+        options.filter(option => {
+          // Exclude already selected options
+          if (
+            multiple &&
+            value.some(
+              (value2: any) => value2 !== null && option.value === value2
+            )
+          ) {
+            return false;
+          }
+          return true;
+        }),
+        // options,
+        {
+          inputValue: inputIsSelectedValue && inputPristine ? '' : inputValue,
+          isCreatable,
+        }
+      )
+    : [];
+
   const resetInputValue = useCallback(
     newValue => {
       const isOptionSelected = multiple
@@ -197,9 +209,14 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     [inputValue, multiple, value]
   );
 
+  // Either the value is a array (for multiple) or a value string (of option)
   useEffect(() => {
-    resetInputValue(value);
-  }, [value]);
+    if (multiple) {
+      resetInputValue(value);
+    } else {
+      resetInputValue(getOptionFromValue(value));
+    }
+  }, [value, multiple]);
 
   const handleOpen = (event: any) => {
     if (popupOpen) {
@@ -207,6 +224,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     }
 
     setPopupOpen(true);
+    setInputPristine(true);
   };
 
   const handleClose = (event: any) => {
@@ -235,6 +253,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     const newValue = event.target.value;
     if (inputValue !== newValue) {
       setInputValue(newValue);
+      setInputPristine(false);
     }
   };
 
@@ -254,7 +273,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
       }
     }
 
-    resetInputValue(newValue);
+    resetInputValue(option);
     setValue(newValue);
 
     if (onChange) {

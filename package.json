@@ -149,13 +149,12 @@
     "**/@types/react": "^17.0.40",
     "**/@types/react-dom": "^17.0.13",
     "**/cross-fetch": "^3.1.5",
-    "**/react-is": "^17.0.2"
+    "**/react-is": "^17.0.2",
+    "@types/is-ci": "^3.0.0",
+    "hoist-non-react-statics": "^3.3.2"
   },
   "workspaces": [
     "packages/*"
   ],
-  "name": "kuka-ui",
-  "dependencies": {
-    "@types/is-ci": "^3.0.0"
-  }
+  "name": "kuka-ui"
 }
