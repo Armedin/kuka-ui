@@ -32,6 +32,10 @@ const BadgeRoot = styled('div', {
     backgroundColor: 'var(--kukui-lime-100)',
     color: 'var(--kukui-lime-800)',
   }),
+  ...(props.color === 'warning' && {
+    backgroundColor: 'var(--kukui-yellow-100)',
+    color: 'var(--kukui-yellow-900)',
+  }),
 }));
 
 const Badge = (props: BadgeProps) => {

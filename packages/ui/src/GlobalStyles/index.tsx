@@ -74,6 +74,18 @@ const GlobalStyles = () => {
           --kukui-lime-800: #66a80f;
           --kukui-lime-900: #5c940d;
           --kukui-lime: #82c91e;
+
+          --kukui-yellow-50: #fff9db;
+          --kukui-yellow-100: #fff3bf;
+          --kukui-yellow-200: #ffec99;
+          --kukui-yellow-300: #ffe066;
+          --kukui-yellow-400: #ffd43b;
+          --kukui-yellow-500: #fcc419;
+          --kukui-yellow-600: #fab005;
+          --kukui-yellow-700: #f59f00;
+          --kukui-yellow-800: #f08c00;
+          --kukui-yellow-900: #e67700;
+          --kukui-yellow: #fab005;
         }
       `}
     />

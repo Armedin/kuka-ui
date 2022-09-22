@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import React, { useCallback, useRef, useState } from 'react';
 import { useEffect } from 'react';
+import { ControllerProps } from 'react-hook-form';
 import Badge from '../Badge';
 import IconButton from '../IconButton';
 import Input from '../Input';
+import ValidationInput from '../Input/ValidationInput';
 import { ChevronDownSolid } from '../lib/icons';
 import Menu from '../Menu';
 import MenuItem from '../MenuItem';
@@ -28,7 +30,9 @@ export interface SelectProps {
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   helperText?: string;
+  validation?: ControllerProps['rules'];
   required?: boolean;
+  isControlled?: boolean;
   error?: boolean;
   onChange?: (event: any, value: string | string[]) => void;
   onCreateOption?: (value: string) => void;
@@ -85,6 +89,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     options = [],
     label,
     helperText,
+    name,
     onChange,
     onCreateOption,
     placeholder = 'Select category...',
@@ -92,6 +97,9 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     value: valueProp,
     inputValue: inputValueProp,
     multiple = false,
+    validation = {},
+    isControlled = false,
+    required = false,
   } = inProps;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -182,10 +190,9 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
 
   const resetInputValue = useCallback(
     newValue => {
-      const isOptionSelected = multiple
-        ? value.length < newValue.length
-        : newValue !== null;
-
+      // const isOptionSelected = multiple
+      //   ? value.length < newValue.length
+      //   : newValue !== null && newValue !== undefined;
       // if (!isOptionSelected) {
       //   return;
       // }
@@ -246,6 +253,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
 
   const handleBlur = (event: any) => {
     setFocused(false);
+    resetInputValue(getOptionFromValue(value));
     handleClose(event);
   };
 
@@ -283,7 +291,8 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     if (option.inputValue && onCreateOption) {
       onCreateOption(getOptionValue(option));
     }
-    inputRef.current?.blur();
+    setTimeout(() => inputRef.current?.blur());
+    // inputRef.current?.blur();
   };
 
   const renderOption = (option: Option, index: number) => {
@@ -352,27 +361,69 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     );
   }
 
+  if (required) {
+    validation.required = 'This field is required';
+  }
+
+  const hasValidation =
+    (Object.keys(validation).length > 0 || isControlled) && name !== undefined;
+
   return (
     <React.Fragment>
       <SelectRoot className="KukuiSelect">
-        <Input
-          ref={anchorEl}
-          inputRef={inputRef}
-          placeholder={placeholder}
-          label={label}
-          helperText={helperText}
-          value={inputValue}
-          onClick={handleClick}
-          onChange={handleInputChange}
-          prefix={prefix}
-          suffix={
-            <IconButton size="small">
-              <SelectIcon className="KukuiSelectIcon" as={ChevronDownSolid} />
-            </IconButton>
-          }
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
+        {hasValidation ? (
+          <ValidationInput
+            name={name}
+            validation={validation}
+            input={
+              <Input
+                {...{
+                  ref: anchorEl,
+                  inputRef,
+                  placeholder,
+                  label,
+                  helperText,
+                  prefix,
+                  required,
+                  onClick: handleClick,
+                  onChange: handleInputChange,
+                  onFocus: handleFocus,
+                  onBlur: handleBlur,
+                  value: inputValue,
+                  actualValue: value,
+                  suffix: (
+                    <IconButton size="small">
+                      <SelectIcon
+                        className="KukuiSelectIcon"
+                        as={ChevronDownSolid}
+                      />
+                    </IconButton>
+                  ),
+                }}
+              />
+            }
+          />
+        ) : (
+          <Input
+            ref={anchorEl}
+            inputRef={inputRef}
+            placeholder={placeholder}
+            label={label}
+            helperText={helperText}
+            value={inputValue}
+            onClick={handleClick}
+            onChange={handleInputChange}
+            prefix={prefix}
+            name={name}
+            suffix={
+              <IconButton size="small">
+                <SelectIcon className="KukuiSelectIcon" as={ChevronDownSolid} />
+              </IconButton>
+            }
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+          />
+        )}
       </SelectRoot>
       {popupOpen && anchorEl.current && (
         <Menu

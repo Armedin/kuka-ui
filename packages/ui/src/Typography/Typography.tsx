@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { styledSx, SxProps } from '@kukui/system';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 
-export interface TypographyProps {
+export interface TypographyProps extends HTMLAttributes<any> {
   sx?: SxProps;
   truncate?: boolean;
   component?: React.ElementType;

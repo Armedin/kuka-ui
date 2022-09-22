@@ -39,7 +39,29 @@ const ValidationInput = ({
           helperText: error ? error.message : input.props.helperText,
           error: error ? true : false,
           ref,
+
+          // All for Select Input
+          ...('onChange' in input.props && {
+            onChange: (event: any) => {
+              input.props.onChange(event);
+            },
+          }),
+          ...('value' in input.props && {
+            value: input.props.value,
+          }),
+          ...('onBlur' in input.props &&
+            'actualValue' in input.props && {
+              onBlur: (event: any) => {
+                onBlur();
+                input.props.onBlur(event);
+                onChange(input.props.actualValue);
+              },
+            }),
+          ...('ref' in input.props && {
+            ref: input.props.ref,
+          }),
         });
+
         return NewInput;
       }}
     />

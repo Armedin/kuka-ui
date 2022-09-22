@@ -1,15 +1,16 @@
 import React from 'react';
 import { Transition } from 'react-transition-group';
 import styled from '@emotion/styled';
-import { IconButton } from '@kukui/ui';
+import { ClickAwayListener, IconButton } from '@kukui/ui';
 import { XMarkSolid } from '../lib/icons';
+import Portal from '../Portal';
 
 interface ModalProps {
   open?: boolean;
   onClose?(): void;
 }
 
-const duration = 400;
+const duration = 250;
 const defaultStyle = {
   transition: `transform ${duration}ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms, opacity ${duration}ms cubic-bezier(0.25, 0.8, 0.25, 1) 0ms`,
   opacity: 0,
@@ -18,14 +19,14 @@ const defaultStyle = {
 const transitionStyles: { [key: string]: any } = {
   entering: { transform: 'scale(0.5)', opacity: 0 },
   entered: { transform: 'scale(1)', opacity: 1 },
-  exiting: { transform: 'scale(1)', opacity: 1 },
+  exiting: { transform: 'scale(0.5)', opacity: 0 },
   exited: { transform: 'scale(0.5)', opacity: 0 },
 };
 
 const overlayTransition: { [key: string]: any } = {
-  entering: { opacity: 0 },
+  entering: { opacity: 1 },
   entered: { opacity: 1 },
-  exiting: { opacity: 1 },
+  exiting: { opacity: 0 },
   exited: { opacity: 0 },
 };
 
@@ -35,7 +36,7 @@ const OverlayBackdrop = styled('div')({
   bottom: 0,
   left: 0,
   right: 0,
-  zIndex: 1000,
+  zIndex: 96,
   background: 'rgba(0,0,0,.32)',
   opacity: 0,
 });
@@ -50,7 +51,8 @@ const Container = styled('div')({
   bottom: 0,
   width: '100%',
   height: '100%',
-  zIndex: 1000,
+  zIndex: 97,
+  pointerEvents: 'none',
 });
 const ModalBody = styled('div')({
   background: '#fff',
@@ -64,6 +66,7 @@ const ModalBody = styled('div')({
   flexDirection: 'column',
   borderRadius: '8px',
   width: '640px',
+  pointerEvents: 'auto',
 });
 const CloseButtonContainer = styled('div')({
   paddingRight: '.75rem',
@@ -93,19 +96,38 @@ const Modal = ({
   children,
   onClose,
 }: React.PropsWithChildren<ModalProps>) => {
+  const handleBackdropClick = (event: any) => {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <>
-      <Transition in={open} timeout={duration} mountOnEnter unmountOnExit>
+    <Portal>
+      <Transition
+        in={open}
+        timeout={{ enter: 0, exit: duration }}
+        unmountOnExit
+      >
         {state => (
           <OverlayBackdrop
+            onClick={handleBackdropClick}
             style={{ ...defaultStyle, ...overlayTransition[state] }}
           />
         )}
       </Transition>
-      <Transition in={open} timeout={duration} mountOnEnter unmountOnExit>
+      <Transition
+        in={open}
+        timeout={{ enter: 0, exit: duration }}
+        unmountOnExit
+      >
         {state => (
           <Container style={{ ...defaultStyle, ...transitionStyles[state] }}>
-            <ModalBody>
+            <ModalBody className="KukuiModalBody">
               <CloseButtonContainer>
                 <CloseButton onClick={onClose}>
                   <XMarkSolid />
@@ -116,7 +138,7 @@ const Modal = ({
           </Container>
         )}
       </Transition>
-    </>
+    </Portal>
   );
 };
 
