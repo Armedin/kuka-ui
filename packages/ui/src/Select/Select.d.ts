@@ -1,4 +1,5 @@
 import React from 'react';
+import { ControllerProps } from 'react-hook-form';
 export interface Option {
     value: string;
     label: string;
@@ -16,7 +17,9 @@ export interface SelectProps {
     prefix?: React.ReactNode;
     suffix?: React.ReactNode;
     helperText?: string;
+    validation?: ControllerProps['rules'];
     required?: boolean;
+    isControlled?: boolean;
     error?: boolean;
     onChange?: (event: any, value: string | string[]) => void;
     onCreateOption?: (value: string) => void;

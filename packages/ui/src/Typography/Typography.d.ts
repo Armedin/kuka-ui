@@ -1,6 +1,6 @@
 import { SxProps } from '@kukui/system';
-import React from 'react';
-export interface TypographyProps {
+import React, { HTMLAttributes } from 'react';
+export interface TypographyProps extends HTMLAttributes<any> {
     sx?: SxProps;
     truncate?: boolean;
     component?: React.ElementType;

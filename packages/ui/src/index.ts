@@ -52,6 +52,9 @@ export * from './FormContainer';
 export { default as Radio } from './Radio';
 export * from './Radio';
 
+export { default as Checkbox } from './Checkbox';
+export * from './Checkbox';
+
 export { default as Badge } from './Badge';
 export * from './Badge';
 
