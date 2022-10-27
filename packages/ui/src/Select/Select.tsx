@@ -130,6 +130,10 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
   };
 
   const getOptionLabel = (option: Option | string) => {
+    if (!option) {
+      return '';
+    }
+
     if (typeof option === 'string') {
       return option;
     }
