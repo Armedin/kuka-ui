@@ -35,9 +35,11 @@ export interface SelectProps {
   isControlled?: boolean;
   error?: boolean;
   onChange?: (event: any, value: string | string[]) => void;
+  onInputChange?: (event: any) => void;
   onCreateOption?: (value: string) => void;
   isCreatable?: boolean;
   multiple?: boolean;
+  filterOptions?: any;
 }
 
 const SelectRoot = styled('div')({
@@ -66,7 +68,7 @@ const SelectIcon = styled('svg')({
   fontSize: '12px',
 });
 
-const filterOptions = (
+const defaultFilterOptions = (
   options: Option[],
   { inputValue, isCreatable }: { inputValue: string; isCreatable: boolean }
 ) => {
@@ -91,6 +93,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     helperText,
     name,
     onChange,
+    onInputChange,
     onCreateOption,
     placeholder = 'Select category...',
     isCreatable = false,
@@ -100,6 +103,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     validation = {},
     isControlled = false,
     required = false,
+    filterOptions = defaultFilterOptions,
   } = inProps;
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -266,6 +270,7 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
     if (inputValue !== newValue) {
       setInputValue(newValue);
       setInputPristine(false);
+      onInputChange?.(event);
     }
   };
 
@@ -447,7 +452,9 @@ const Select = React.forwardRef<any, SelectProps>((inProps, ref) => {
           }}
           ref={menuRef}
         >
-          {filteredOptions.map((option, index) => renderOption(option, index))}
+          {filteredOptions.map((option: any, index: any) =>
+            renderOption(option, index)
+          )}
         </Menu>
       )}
     </React.Fragment>

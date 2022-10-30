@@ -22,9 +22,11 @@ export interface SelectProps {
     isControlled?: boolean;
     error?: boolean;
     onChange?: (event: any, value: string | string[]) => void;
+    onInputChange?: (event: any) => void;
     onCreateOption?: (value: string) => void;
     isCreatable?: boolean;
     multiple?: boolean;
+    filterOptions?: any;
 }
 declare const Select: React.ForwardRefExoticComponent<SelectProps & React.RefAttributes<any>>;
 export default Select;
