@@ -39,7 +39,9 @@ const ValidationInput = ({
           helperText: error ? error.message : input.props.helperText,
           error: error ? true : false,
           ref,
-
+          ...('ref' in input.props && {
+            ref: input.props.ref,
+          }),
           // All for Select Input
           ...('onChange' in input.props && {
             onChange: (event: any) => {
@@ -57,9 +59,11 @@ const ValidationInput = ({
                 onChange(input.props.actualValue);
               },
             }),
-          ...('ref' in input.props && {
-            ref: input.props.ref,
-          }),
+          // This bit happens for select input for some reason
+          ...('ref' in input &&
+            (input as any).ref && {
+              ref: (input as any).ref,
+            }),
         });
 
         return NewInput;
